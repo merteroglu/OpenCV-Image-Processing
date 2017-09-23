@@ -1,0 +1,21 @@
+﻿  MainForm.cpp
+c:\users\mert\documents\visual studio 2017\projects\yazlabproject1\yazlabproject1\MainForm.h(269): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\mert\documents\visual studio 2017\projects\yazlabproject1\yazlabproject1\MainForm.h(270): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+MainForm.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+c:\opencv\build\include\opencv2\core\cvstd.hpp(596): warning C4793: 'cv::String::String': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\mat.inl.hpp(413): warning C4793: 'cv::Mat::Mat': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\mat.inl.hpp(703): warning C4793: 'cv::Mat::release': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\mat.inl.hpp(1929): warning C4793: 'cv::SparseMat::addref': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\mat.inl.hpp(3530): warning C4793: 'cv::UMat::addref': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\ptr.inl.hpp(67): warning C4793: 'cv::detail::PtrOwner::incRef': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\ptr.inl.hpp(72): warning C4793: 'cv::detail::PtrOwner::decRef': function compiled as native:
+  	Found an intrinsic not supported in managed code
+c:\opencv\build\include\opencv2\core\mat.inl.hpp(601): warning C4793: 'cv::Mat::operator=': function compiled as native:
+  	Found an intrinsic not supported in managed code
+  yazLabProject1.vcxproj -> C:\Users\Mert\documents\visual studio 2017\Projects\yazLabProject1\x64\Debug\yazLabProject1.exe
