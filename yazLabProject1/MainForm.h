@@ -18,8 +18,8 @@ namespace yazLabProject1 {
 	using namespace cv;
 	using namespace msclr::interop;
     
-	Mat img;
-
+	Mat img,tempImg;
+	std::string path;
 
 	/// <summary>
 	/// Summary for MainForm
@@ -55,6 +55,12 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::Button^  btnSagaDondur;
 	private: System::Windows::Forms::Button^  btnSolaDondur;
 	private: System::Windows::Forms::Button^  btnGriTonlama;
+	private: System::Windows::Forms::Button^  btnReOpen;
+	private: System::Windows::Forms::GroupBox^  groupBox1;
+	private: System::Windows::Forms::RadioButton^  rButtonOrjinal;
+	private: System::Windows::Forms::RadioButton^  rButtonBlue;
+	private: System::Windows::Forms::RadioButton^  rButtonGreen;
+	private: System::Windows::Forms::RadioButton^  rButtonRed;
 
 	protected:
 
@@ -80,7 +86,14 @@ namespace yazLabProject1 {
 			this->btnSagaDondur = (gcnew System::Windows::Forms::Button());
 			this->btnSolaDondur = (gcnew System::Windows::Forms::Button());
 			this->btnGriTonlama = (gcnew System::Windows::Forms::Button());
+			this->btnReOpen = (gcnew System::Windows::Forms::Button());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->rButtonOrjinal = (gcnew System::Windows::Forms::RadioButton());
+			this->rButtonBlue = (gcnew System::Windows::Forms::RadioButton());
+			this->rButtonGreen = (gcnew System::Windows::Forms::RadioButton());
+			this->rButtonRed = (gcnew System::Windows::Forms::RadioButton());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// btnOpen
@@ -114,7 +127,7 @@ namespace yazLabProject1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(562, 263);
+			this->label1->Location = System::Drawing::Point(560, 305);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
@@ -161,11 +174,82 @@ namespace yazLabProject1 {
 			this->btnGriTonlama->UseVisualStyleBackColor = true;
 			this->btnGriTonlama->Click += gcnew System::EventHandler(this, &MainForm::btnGriTonlama_Click);
 			// 
+			// btnReOpen
+			// 
+			this->btnReOpen->Location = System::Drawing::Point(609, 190);
+			this->btnReOpen->Name = L"btnReOpen";
+			this->btnReOpen->Size = System::Drawing::Size(101, 23);
+			this->btnReOpen->TabIndex = 8;
+			this->btnReOpen->Text = L"Tekrar Aç";
+			this->btnReOpen->UseVisualStyleBackColor = true;
+			this->btnReOpen->Click += gcnew System::EventHandler(this, &MainForm::btnReOpen_Click);
+			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->rButtonOrjinal);
+			this->groupBox1->Controls->Add(this->rButtonBlue);
+			this->groupBox1->Controls->Add(this->rButtonGreen);
+			this->groupBox1->Controls->Add(this->rButtonRed);
+			this->groupBox1->Location = System::Drawing::Point(563, 219);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(236, 50);
+			this->groupBox1->TabIndex = 10;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Renk Kanallarý";
+			// 
+			// rButtonOrjinal
+			// 
+			this->rButtonOrjinal->AutoSize = true;
+			this->rButtonOrjinal->Checked = true;
+			this->rButtonOrjinal->Location = System::Drawing::Point(171, 19);
+			this->rButtonOrjinal->Name = L"rButtonOrjinal";
+			this->rButtonOrjinal->Size = System::Drawing::Size(54, 17);
+			this->rButtonOrjinal->TabIndex = 3;
+			this->rButtonOrjinal->TabStop = true;
+			this->rButtonOrjinal->Text = L"Orjinal";
+			this->rButtonOrjinal->UseVisualStyleBackColor = true;
+			this->rButtonOrjinal->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonOrjinal_CheckedChanged);
+			// 
+			// rButtonBlue
+			// 
+			this->rButtonBlue->AutoSize = true;
+			this->rButtonBlue->Location = System::Drawing::Point(118, 19);
+			this->rButtonBlue->Name = L"rButtonBlue";
+			this->rButtonBlue->Size = System::Drawing::Size(46, 17);
+			this->rButtonBlue->TabIndex = 2;
+			this->rButtonBlue->Text = L"Blue";
+			this->rButtonBlue->UseVisualStyleBackColor = true;
+			this->rButtonBlue->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonBlue_CheckedChanged);
+			// 
+			// rButtonGreen
+			// 
+			this->rButtonGreen->AutoSize = true;
+			this->rButtonGreen->Location = System::Drawing::Point(58, 19);
+			this->rButtonGreen->Name = L"rButtonGreen";
+			this->rButtonGreen->Size = System::Drawing::Size(54, 17);
+			this->rButtonGreen->TabIndex = 1;
+			this->rButtonGreen->Text = L"Green";
+			this->rButtonGreen->UseVisualStyleBackColor = true;
+			this->rButtonGreen->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonGreen_CheckedChanged);
+			// 
+			// rButtonRed
+			// 
+			this->rButtonRed->AutoSize = true;
+			this->rButtonRed->Location = System::Drawing::Point(6, 19);
+			this->rButtonRed->Name = L"rButtonRed";
+			this->rButtonRed->Size = System::Drawing::Size(45, 17);
+			this->rButtonRed->TabIndex = 0;
+			this->rButtonRed->Text = L"Red";
+			this->rButtonRed->UseVisualStyleBackColor = true;
+			this->rButtonRed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonRed_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1008, 561);
+			this->Controls->Add(this->groupBox1);
+			this->Controls->Add(this->btnReOpen);
 			this->Controls->Add(this->btnGriTonlama);
 			this->Controls->Add(this->btnSolaDondur);
 			this->Controls->Add(this->btnSagaDondur);
@@ -177,6 +261,8 @@ namespace yazLabProject1 {
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -187,7 +273,6 @@ namespace yazLabProject1 {
 	private: System::Void btnOpen_Click(System::Object^  sender, System::EventArgs^  e) {
 		
 		
-		
 		openFileDialog1->Filter = "Image Files|*.*|*.jpg|*.png|*.jpeg|";
 		openFileDialog1->Title = "Resim Dosyasýný seçiniz";
 
@@ -195,8 +280,9 @@ namespace yazLabProject1 {
 			//MessageBox::Show(openFileDialog1->FileName, "Path");
 			System::String ^ managed = openFileDialog1->FileName;
 			std::string str = msclr::interop::marshal_as<std::string>(managed);
-
+			path = str;
 			img = imread(str);
+			tempImg = img;
 			//pictureBox1->Load(managed);
 			pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
 			pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
@@ -230,9 +316,18 @@ namespace yazLabProject1 {
 		subtract(sub_mat, img, negativeImg);
 		*/
 
-		negativeImg = 255 - img;
+		for (int i = 0; i < img.rows; i++) {
+			for (int j = 0; j < img.cols; j++) {
+				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+				cv::Vec3b newPoint(255-myVec[0], 255 - myVec[1], 255 - myVec[2]);
+				negativeImg.at<cv::Vec3b>(i, j) = newPoint;
+			}
+		}
+
 		img = negativeImg;
+		tempImg = img;
 		//imshow("Negative image", negativeImg);
+
 		DrawCVImage(pictureBox1, negativeImg);
 		waitKey(0);
 	}
@@ -255,6 +350,7 @@ namespace yazLabProject1 {
 
 		label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
 		img = aynalananImg;
+		tempImg = img;
 
 		DrawCVImage(pictureBox1, img);
 
@@ -291,6 +387,7 @@ private: System::Void btnSagaDondur_Click(System::Object^  sender, System::Event
 	
 	label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
 	img = dondurulenImg;
+	tempImg = img;
 	//imshow("dondurulen", img);
 	DrawCVImage(pictureBox1, img);
 
@@ -310,6 +407,7 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 
 	label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
 	img = dondurulenImg;
+	tempImg = img;
 	//imshow("dondurulen", img);
 	DrawCVImage(pictureBox1, img);
 }
@@ -333,10 +431,78 @@ private: System::Void btnGriTonlama_Click(System::Object^  sender, System::Event
 	}
 	
 	img = newImg;
+	tempImg = img;
 	//imshow("dondurulen", img);
 	DrawCVImage(pictureBox1, newImg);
 }
 
+private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs^  e) {
+	img = imread(path);
+	tempImg = img;
+	//pictureBox1->Load(managed);
+	System::String ^ managed = openFileDialog1->FileName;
+	pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
+	pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+
+}
+
+void setRGBChannels(int type) {
+	Mat newImg = Mat::zeros(img.size(), img.type());
+	img = tempImg;
+	int i, j;
+
+	for (i = 0; i < img.rows; i++) {
+		for (j = 0; j < img.cols; j++) {
+			cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+			//uchar temp = (myVec[0] + myVec[1] + myVec[2]) / 3;
+			uchar tempR = myVec[2];
+			uchar tempG = myVec[1];
+			uchar tempB = myVec[0];
+			if (type == 0) {
+				tempR = 255;
+			}
+			else if (type == 1) {
+				tempG = 255;
+			}
+			else if (type == 2) {
+				tempB = 255;
+			}
+			else if (type == 3) {
+				img = tempImg;
+			}
+
+			cv::Vec3b newPoint(tempB, tempG, tempR);
+			newImg.at<cv::Vec3b>(i, j) = newPoint;
+		}
+	}
+	img = newImg;
+	DrawCVImage(pictureBox1, newImg);
+
+
+}
+
+
+private: System::Void rButtonRed_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	if (rButtonRed->Checked) {
+		setRGBChannels(0);
+	}
+}
+
+private: System::Void rButtonGreen_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	if (rButtonGreen->Checked) {
+		setRGBChannels(1);
+	}
+}
+private: System::Void rButtonBlue_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	if (rButtonBlue->Checked) {
+		setRGBChannels(2);
+	}
+}
+private: System::Void rButtonOrjinal_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+	if (rButtonOrjinal->Checked) {
+		setRGBChannels(3);
+	}
+}
 };
 
 
