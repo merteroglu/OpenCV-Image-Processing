@@ -374,21 +374,22 @@ namespace yazLabProject1 {
 private: System::Void btnSagaDondur_Click(System::Object^  sender, System::EventArgs^  e) {
 	cv::Size newSize =  cv::Size(img.size().height, img.size().width);
 	Mat transpozeImg = Mat::zeros(newSize, img.type());
-	Mat dondurulenImg = Mat::zeros(newSize , img.type());
+	Mat dondurulenImg = Mat::zeros(newSize, img.type());
 	int i, j;
 
-	
+	label1->Text = " w ve h :" + img.rows.ToString() + " , " + img.cols.ToString();
+		
 		for (i = 0; i < img.rows; i++) {
 			for (j = 0; j < img.cols; j++) {
-				dondurulenImg.at<cv::Vec3b>(i,j) = img.at<cv::Vec3b>(img.cols-j-1, i);
+				dondurulenImg.at<cv::Vec3b>(j, i) = img.at<cv::Vec3b>(img.rows - i-1, j);
 			}
 		}
 	
 	
-	label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
+			//label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
 	img = dondurulenImg;
 	tempImg = img;
-	//imshow("dondurulen", img);
+			//imshow("dondurulen", dondurulenImg);
 	DrawCVImage(pictureBox1, img);
 
 }
@@ -401,6 +402,7 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 
 	for (i = 0; i < img.rows; i++) {
 		for (j = 0; j < img.cols; j++) {
+			//dondurulenImg.at<cv::Vec3b>(j,i) = img.at<cv::Vec3b>(i, img.cols - j - 1);
 			dondurulenImg.at<cv::Vec3b>(img.cols - j - 1, i) = img.at<cv::Vec3b>(i, j);
 		}
 	}
