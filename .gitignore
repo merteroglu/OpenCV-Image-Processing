@@ -38,3 +38,4 @@
 *.ipch
 *.suo
 .vs/yazLabProject1/v15/Browse.VC.db
+*.opendb
