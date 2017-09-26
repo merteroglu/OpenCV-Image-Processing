@@ -61,6 +61,9 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::RadioButton^  rButtonBlue;
 	private: System::Windows::Forms::RadioButton^  rButtonGreen;
 	private: System::Windows::Forms::RadioButton^  rButtonRed;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
+	private: System::Windows::Forms::Button^  btnCreateGrayHistogram;
+	private: System::Windows::Forms::Button^  btnRGBHistogram;
 
 	protected:
 
@@ -77,6 +80,12 @@ namespace yazLabProject1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -92,8 +101,12 @@ namespace yazLabProject1 {
 			this->rButtonBlue = (gcnew System::Windows::Forms::RadioButton());
 			this->rButtonGreen = (gcnew System::Windows::Forms::RadioButton());
 			this->rButtonRed = (gcnew System::Windows::Forms::RadioButton());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->btnCreateGrayHistogram = (gcnew System::Windows::Forms::Button());
+			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// btnOpen
@@ -127,7 +140,7 @@ namespace yazLabProject1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(560, 305);
+			this->label1->Location = System::Drawing::Point(566, 272);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
@@ -243,11 +256,70 @@ namespace yazLabProject1 {
 			this->rButtonRed->UseVisualStyleBackColor = true;
 			this->rButtonRed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonRed_CheckedChanged);
 			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
+			this->chart1->Location = System::Drawing::Point(545, 334);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series1->IsXValueIndexed = true;
+			series1->Legend = L"Legend1";
+			series1->Name = L"Histogram";
+			series2->ChartArea = L"ChartArea1";
+			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series2->IsXValueIndexed = true;
+			series2->Legend = L"Legend1";
+			series2->Name = L"Red";
+			series3->ChartArea = L"ChartArea1";
+			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series3->IsXValueIndexed = true;
+			series3->Legend = L"Legend1";
+			series3->Name = L"Blue";
+			series4->ChartArea = L"ChartArea1";
+			series4->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series4->IsXValueIndexed = true;
+			series4->Legend = L"Legend1";
+			series4->Name = L"Green";
+			this->chart1->Series->Add(series1);
+			this->chart1->Series->Add(series2);
+			this->chart1->Series->Add(series3);
+			this->chart1->Series->Add(series4);
+			this->chart1->Size = System::Drawing::Size(398, 190);
+			this->chart1->TabIndex = 11;
+			this->chart1->Text = L"chart1";
+			// 
+			// btnCreateGrayHistogram
+			// 
+			this->btnCreateGrayHistogram->Location = System::Drawing::Point(563, 305);
+			this->btnCreateGrayHistogram->Name = L"btnCreateGrayHistogram";
+			this->btnCreateGrayHistogram->Size = System::Drawing::Size(132, 23);
+			this->btnCreateGrayHistogram->TabIndex = 12;
+			this->btnCreateGrayHistogram->Text = L"Create Gray Histogram";
+			this->btnCreateGrayHistogram->UseVisualStyleBackColor = true;
+			this->btnCreateGrayHistogram->Click += gcnew System::EventHandler(this, &MainForm::btnCreateGrayHistogram_Click);
+			// 
+			// btnRGBHistogram
+			// 
+			this->btnRGBHistogram->Location = System::Drawing::Point(724, 305);
+			this->btnRGBHistogram->Name = L"btnRGBHistogram";
+			this->btnRGBHistogram->Size = System::Drawing::Size(132, 23);
+			this->btnRGBHistogram->TabIndex = 13;
+			this->btnRGBHistogram->Text = L"Create RGB Histogram";
+			this->btnRGBHistogram->UseVisualStyleBackColor = true;
+			this->btnRGBHistogram->Click += gcnew System::EventHandler(this, &MainForm::btnRGBHistogram_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1008, 561);
+			this->Controls->Add(this->btnRGBHistogram);
+			this->Controls->Add(this->btnCreateGrayHistogram);
+			this->Controls->Add(this->chart1);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->btnReOpen);
 			this->Controls->Add(this->btnGriTonlama);
@@ -263,6 +335,7 @@ namespace yazLabProject1 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -483,7 +556,6 @@ void setRGBChannels(int type) {
 
 }
 
-
 private: System::Void rButtonRed_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (rButtonRed->Checked) {
 		setRGBChannels(0);
@@ -495,16 +567,69 @@ private: System::Void rButtonGreen_CheckedChanged(System::Object^  sender, Syste
 		setRGBChannels(1);
 	}
 }
+
 private: System::Void rButtonBlue_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (rButtonBlue->Checked) {
 		setRGBChannels(2);
 	}
 }
+
 private: System::Void rButtonOrjinal_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
 	if (rButtonOrjinal->Checked) {
 		setRGBChannels(3);
 	}
 }
+
+private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
+	int arr[256] = { 0 };
+	this->chart1->Series["Red"]->Points->Clear();
+	this->chart1->Series["Blue"]->Points->Clear();
+	this->chart1->Series["Green"]->Points->Clear();
+	this->chart1->Series["Histogram"]->Points->Clear();
+
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < img.cols; j++) {
+			arr[(int)img.at<uchar>(i, j)]++;
+		}
+	}
+
+	for (int k = 0; k < 256; k++) {
+		this->chart1->Series["Histogram"]->Points->AddXY(k, arr[k]);
+	}
+
+
+}
+
+private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
+	this->chart1->Series["Red"]->Points->Clear();
+	this->chart1->Series["Blue"]->Points->Clear();
+	this->chart1->Series["Green"]->Points->Clear();
+	this->chart1->Series["Histogram"]->Points->Clear();
+
+	int arrR[256] = { 0 };
+	int arrB[256] = { 0 };
+	int arrG[256] = { 0 };
+
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < img.cols; j++) {
+			cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+			uchar tempR = myVec[2];
+			uchar tempG = myVec[1];
+			uchar tempB = myVec[0];
+			arrR[(int)tempR]++;
+			arrB[(int)tempB]++;
+			arrG[(int)tempG]++;
+
+		}
+	}
+
+	for (int k = 0; k < 256; k++) {
+		this->chart1->Series["Red"]->Points->AddXY(k, arrR[k]);
+		this->chart1->Series["Blue"]->Points->AddXY(k, arrB[k]);
+		this->chart1->Series["Green"]->Points->AddXY(k, arrG[k]);
+	}
+}
+
 };
 
 
