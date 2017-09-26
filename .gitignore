@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+*.log
+*.pdb
+*.log
+*.tlog
+*.lastbuildstate
+*.ipch
+*.suo
+.vs/yazLabProject1/v15/Browse.VC.db
