@@ -64,6 +64,11 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::TextBox^  txtResizeX;
 	private: System::Windows::Forms::TextBox^  txtResizeY;
 	private: System::Windows::Forms::Button^  btnResize;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
+	private: System::Windows::Forms::Button^  btnCreateGrayHistogram;
+	private: System::Windows::Forms::Button^  btnRGBHistogram;
+
+
 
 	protected:
 
@@ -80,6 +85,12 @@ namespace yazLabProject1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -98,16 +109,19 @@ namespace yazLabProject1 {
 			this->txtResizeX = (gcnew System::Windows::Forms::TextBox());
 			this->txtResizeY = (gcnew System::Windows::Forms::TextBox());
 			this->btnResize = (gcnew System::Windows::Forms::Button());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->btnCreateGrayHistogram = (gcnew System::Windows::Forms::Button());
+			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// btnOpen
 			// 
-			this->btnOpen->Location = System::Drawing::Point(812, 15);
-			this->btnOpen->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnOpen->Location = System::Drawing::Point(609, 12);
 			this->btnOpen->Name = L"btnOpen";
-			this->btnOpen->Size = System::Drawing::Size(135, 28);
+			this->btnOpen->Size = System::Drawing::Size(101, 23);
 			this->btnOpen->TabIndex = 0;
 			this->btnOpen->Text = L"Resim Aç";
 			this->btnOpen->UseVisualStyleBackColor = true;
@@ -115,19 +129,17 @@ namespace yazLabProject1 {
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(16, 15);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->pictureBox1->Location = System::Drawing::Point(12, 12);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(683, 630);
+			this->pictureBox1->Size = System::Drawing::Size(512, 512);
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
 			// 
 			// btnNegative
 			// 
-			this->btnNegative->Location = System::Drawing::Point(812, 50);
-			this->btnNegative->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnNegative->Location = System::Drawing::Point(609, 41);
 			this->btnNegative->Name = L"btnNegative";
-			this->btnNegative->Size = System::Drawing::Size(135, 28);
+			this->btnNegative->Size = System::Drawing::Size(101, 23);
 			this->btnNegative->TabIndex = 2;
 			this->btnNegative->Text = L"Negative/Invert";
 			this->btnNegative->UseVisualStyleBackColor = true;
@@ -136,20 +148,18 @@ namespace yazLabProject1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(747, 375);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(560, 305);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(46, 17);
+			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"label1";
 			this->label1->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
 			// 
 			// btnSagAynala
 			// 
-			this->btnSagAynala->Location = System::Drawing::Point(812, 87);
-			this->btnSagAynala->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnSagAynala->Location = System::Drawing::Point(609, 71);
 			this->btnSagAynala->Name = L"btnSagAynala";
-			this->btnSagAynala->Size = System::Drawing::Size(135, 28);
+			this->btnSagAynala->Size = System::Drawing::Size(101, 23);
 			this->btnSagAynala->TabIndex = 4;
 			this->btnSagAynala->Text = L"Aynala";
 			this->btnSagAynala->UseVisualStyleBackColor = true;
@@ -157,10 +167,9 @@ namespace yazLabProject1 {
 			// 
 			// btnSagaDondur
 			// 
-			this->btnSagaDondur->Location = System::Drawing::Point(812, 123);
-			this->btnSagaDondur->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnSagaDondur->Location = System::Drawing::Point(609, 100);
 			this->btnSagaDondur->Name = L"btnSagaDondur";
-			this->btnSagaDondur->Size = System::Drawing::Size(135, 28);
+			this->btnSagaDondur->Size = System::Drawing::Size(101, 23);
 			this->btnSagaDondur->TabIndex = 5;
 			this->btnSagaDondur->Text = L"90 Derece Saða";
 			this->btnSagaDondur->UseVisualStyleBackColor = true;
@@ -168,10 +177,9 @@ namespace yazLabProject1 {
 			// 
 			// btnSolaDondur
 			// 
-			this->btnSolaDondur->Location = System::Drawing::Point(812, 160);
-			this->btnSolaDondur->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnSolaDondur->Location = System::Drawing::Point(609, 130);
 			this->btnSolaDondur->Name = L"btnSolaDondur";
-			this->btnSolaDondur->Size = System::Drawing::Size(135, 28);
+			this->btnSolaDondur->Size = System::Drawing::Size(101, 23);
 			this->btnSolaDondur->TabIndex = 6;
 			this->btnSolaDondur->Text = L"90 Derece Sola";
 			this->btnSolaDondur->UseVisualStyleBackColor = true;
@@ -179,10 +187,9 @@ namespace yazLabProject1 {
 			// 
 			// btnGriTonlama
 			// 
-			this->btnGriTonlama->Location = System::Drawing::Point(812, 197);
-			this->btnGriTonlama->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnGriTonlama->Location = System::Drawing::Point(609, 160);
 			this->btnGriTonlama->Name = L"btnGriTonlama";
-			this->btnGriTonlama->Size = System::Drawing::Size(135, 28);
+			this->btnGriTonlama->Size = System::Drawing::Size(101, 23);
 			this->btnGriTonlama->TabIndex = 7;
 			this->btnGriTonlama->Text = L"Gri Tonlama";
 			this->btnGriTonlama->UseVisualStyleBackColor = true;
@@ -190,10 +197,9 @@ namespace yazLabProject1 {
 			// 
 			// btnReOpen
 			// 
-			this->btnReOpen->Location = System::Drawing::Point(812, 234);
-			this->btnReOpen->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->btnReOpen->Location = System::Drawing::Point(609, 190);
 			this->btnReOpen->Name = L"btnReOpen";
-			this->btnReOpen->Size = System::Drawing::Size(135, 28);
+			this->btnReOpen->Size = System::Drawing::Size(101, 23);
 			this->btnReOpen->TabIndex = 8;
 			this->btnReOpen->Text = L"Tekrar Aç";
 			this->btnReOpen->UseVisualStyleBackColor = true;
@@ -205,11 +211,9 @@ namespace yazLabProject1 {
 			this->groupBox1->Controls->Add(this->rButtonBlue);
 			this->groupBox1->Controls->Add(this->rButtonGreen);
 			this->groupBox1->Controls->Add(this->rButtonRed);
-			this->groupBox1->Location = System::Drawing::Point(751, 270);
-			this->groupBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->groupBox1->Location = System::Drawing::Point(563, 219);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Padding = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->groupBox1->Size = System::Drawing::Size(315, 62);
+			this->groupBox1->Size = System::Drawing::Size(236, 50);
 			this->groupBox1->TabIndex = 10;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Renk Kanallarý";
@@ -218,10 +222,9 @@ namespace yazLabProject1 {
 			// 
 			this->rButtonOrjinal->AutoSize = true;
 			this->rButtonOrjinal->Checked = true;
-			this->rButtonOrjinal->Location = System::Drawing::Point(228, 23);
-			this->rButtonOrjinal->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->rButtonOrjinal->Location = System::Drawing::Point(171, 19);
 			this->rButtonOrjinal->Name = L"rButtonOrjinal";
-			this->rButtonOrjinal->Size = System::Drawing::Size(70, 21);
+			this->rButtonOrjinal->Size = System::Drawing::Size(54, 17);
 			this->rButtonOrjinal->TabIndex = 3;
 			this->rButtonOrjinal->TabStop = true;
 			this->rButtonOrjinal->Text = L"Orjinal";
@@ -231,10 +234,9 @@ namespace yazLabProject1 {
 			// rButtonBlue
 			// 
 			this->rButtonBlue->AutoSize = true;
-			this->rButtonBlue->Location = System::Drawing::Point(157, 23);
-			this->rButtonBlue->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->rButtonBlue->Location = System::Drawing::Point(118, 19);
 			this->rButtonBlue->Name = L"rButtonBlue";
-			this->rButtonBlue->Size = System::Drawing::Size(57, 21);
+			this->rButtonBlue->Size = System::Drawing::Size(46, 17);
 			this->rButtonBlue->TabIndex = 2;
 			this->rButtonBlue->Text = L"Blue";
 			this->rButtonBlue->UseVisualStyleBackColor = true;
@@ -243,10 +245,9 @@ namespace yazLabProject1 {
 			// rButtonGreen
 			// 
 			this->rButtonGreen->AutoSize = true;
-			this->rButtonGreen->Location = System::Drawing::Point(77, 23);
-			this->rButtonGreen->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->rButtonGreen->Location = System::Drawing::Point(58, 19);
 			this->rButtonGreen->Name = L"rButtonGreen";
-			this->rButtonGreen->Size = System::Drawing::Size(69, 21);
+			this->rButtonGreen->Size = System::Drawing::Size(54, 17);
 			this->rButtonGreen->TabIndex = 1;
 			this->rButtonGreen->Text = L"Green";
 			this->rButtonGreen->UseVisualStyleBackColor = true;
@@ -255,10 +256,9 @@ namespace yazLabProject1 {
 			// rButtonRed
 			// 
 			this->rButtonRed->AutoSize = true;
-			this->rButtonRed->Location = System::Drawing::Point(8, 23);
-			this->rButtonRed->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->rButtonRed->Location = System::Drawing::Point(6, 19);
 			this->rButtonRed->Name = L"rButtonRed";
-			this->rButtonRed->Size = System::Drawing::Size(55, 21);
+			this->rButtonRed->Size = System::Drawing::Size(45, 17);
 			this->rButtonRed->TabIndex = 0;
 			this->rButtonRed->Text = L"Red";
 			this->rButtonRed->UseVisualStyleBackColor = true;
@@ -266,33 +266,95 @@ namespace yazLabProject1 {
 			// 
 			// txtResizeX
 			// 
-			this->txtResizeX->Location = System::Drawing::Point(1125, 20);
+			this->txtResizeX->Location = System::Drawing::Point(844, 16);
+			this->txtResizeX->Margin = System::Windows::Forms::Padding(2);
 			this->txtResizeX->Name = L"txtResizeX";
-			this->txtResizeX->Size = System::Drawing::Size(48, 22);
+			this->txtResizeX->Size = System::Drawing::Size(37, 20);
 			this->txtResizeX->TabIndex = 11;
 			// 
 			// txtResizeY
 			// 
-			this->txtResizeY->Location = System::Drawing::Point(1193, 21);
+			this->txtResizeY->Location = System::Drawing::Point(895, 17);
+			this->txtResizeY->Margin = System::Windows::Forms::Padding(2);
 			this->txtResizeY->Name = L"txtResizeY";
-			this->txtResizeY->Size = System::Drawing::Size(46, 22);
+			this->txtResizeY->Size = System::Drawing::Size(36, 20);
 			this->txtResizeY->TabIndex = 12;
 			// 
 			// btnResize
 			// 
-			this->btnResize->Location = System::Drawing::Point(1146, 55);
+			this->btnResize->Location = System::Drawing::Point(860, 45);
+			this->btnResize->Margin = System::Windows::Forms::Padding(2);
 			this->btnResize->Name = L"btnResize";
-			this->btnResize->Size = System::Drawing::Size(75, 23);
+			this->btnResize->Size = System::Drawing::Size(56, 19);
 			this->btnResize->TabIndex = 13;
 			this->btnResize->Text = L"Resize";
 			this->btnResize->UseVisualStyleBackColor = true;
 			this->btnResize->Click += gcnew System::EventHandler(this, &MainForm::btnResize_Click);
 			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
+			this->chart1->Location = System::Drawing::Point(545, 334);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series1->IsXValueIndexed = true;
+			series1->Legend = L"Legend1";
+			series1->Name = L"Histogram";
+			series2->ChartArea = L"ChartArea1";
+			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series2->IsXValueIndexed = true;
+			series2->Legend = L"Legend1";
+			series2->Name = L"Red";
+			series3->ChartArea = L"ChartArea1";
+			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series3->IsXValueIndexed = true;
+			series3->Legend = L"Legend1";
+			series3->Name = L"Blue";
+			series4->ChartArea = L"ChartArea1";
+			series4->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series4->IsXValueIndexed = true;
+			series4->Legend = L"Legend1";
+			series4->Name = L"Green";
+			this->chart1->Series->Add(series1);
+			this->chart1->Series->Add(series2);
+			this->chart1->Series->Add(series3);
+			this->chart1->Series->Add(series4);
+			this->chart1->Size = System::Drawing::Size(398, 190);
+			this->chart1->TabIndex = 11;
+			this->chart1->Text = L"chart1";
+			// 
+			// btnCreateGrayHistogram
+			// 
+			this->btnCreateGrayHistogram->Location = System::Drawing::Point(609, 295);
+			this->btnCreateGrayHistogram->Name = L"btnCreateGrayHistogram";
+			this->btnCreateGrayHistogram->Size = System::Drawing::Size(135, 23);
+			this->btnCreateGrayHistogram->TabIndex = 14;
+			this->btnCreateGrayHistogram->Text = L"Create Gray Histogram";
+			this->btnCreateGrayHistogram->UseVisualStyleBackColor = true;
+			this->btnCreateGrayHistogram->Click += gcnew System::EventHandler(this, &MainForm::btnCreateGrayHistogram_Click);
+			// 
+			// btnRGBHistogram
+			// 
+			this->btnRGBHistogram->Location = System::Drawing::Point(750, 295);
+			this->btnRGBHistogram->Name = L"btnRGBHistogram";
+			this->btnRGBHistogram->Size = System::Drawing::Size(131, 23);
+			this->btnRGBHistogram->TabIndex = 15;
+			this->btnRGBHistogram->Text = L"Create RGB Histogram";
+			this->btnRGBHistogram->UseVisualStyleBackColor = true;
+			this->btnRGBHistogram->Click += gcnew System::EventHandler(this, &MainForm::btnRGBHistogram_Click);
+			// 
 			// MainForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1344, 690);
+			this->ClientSize = System::Drawing::Size(1008, 561);
+			this->Controls->Add(this->btnRGBHistogram);
+			this->Controls->Add(this->btnCreateGrayHistogram);
+			this->Controls->Add(this->chart1);
 			this->Controls->Add(this->btnResize);
 			this->Controls->Add(this->txtResizeY);
 			this->Controls->Add(this->txtResizeX);
@@ -306,12 +368,12 @@ namespace yazLabProject1 {
 			this->Controls->Add(this->btnNegative);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->btnOpen);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -584,6 +646,56 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 	imshow("resize" ,newImg);
 
 }
+private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
+	int arr[256] = { 0 };
+	this->chart1->Series["Red"]->Points->Clear();
+	this->chart1->Series["Blue"]->Points->Clear();
+	this->chart1->Series["Green"]->Points->Clear();
+	this->chart1->Series["Histogram"]->Points->Clear();
+
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < img.cols; j++) {
+			arr[(int)img.at<uchar>(i, j)]++;
+		}
+	}
+
+	for (int k = 0; k < 256; k++) {
+		this->chart1->Series["Histogram"]->Points->AddXY(k, arr[k]);
+	}
+
+}
+
+
+private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
+	this->chart1->Series["Red"]->Points->Clear();
+	this->chart1->Series["Blue"]->Points->Clear();
+	this->chart1->Series["Green"]->Points->Clear();
+	this->chart1->Series["Histogram"]->Points->Clear();
+
+	int arrR[256] = { 0 };
+	int arrB[256] = { 0 };
+	int arrG[256] = { 0 };
+
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < img.cols; j++) {
+			cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+			uchar tempR = myVec[2];
+			uchar tempG = myVec[1];
+			uchar tempB = myVec[0];
+			arrR[(int)tempR]++;
+			arrB[(int)tempB]++;
+			arrG[(int)tempG]++;
+
+		}
+	}
+
+	for (int k = 0; k < 256; k++) {
+		this->chart1->Series["Red"]->Points->AddXY(k, arrR[k]);
+		this->chart1->Series["Blue"]->Points->AddXY(k, arrB[k]);
+		this->chart1->Series["Green"]->Points->AddXY(k, arrG[k]);
+	}
+}
+
 };
 
 
