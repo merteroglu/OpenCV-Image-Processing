@@ -2168,11 +2168,8 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     StartsWith(String): PrivateScope, Public, HideBySig
     StartsWith(String, StringComparison): PrivateScope, Public, HideBySig
     StartsWith(String, Boolean, CultureInfo): PrivateScope, Public, HideBySig
-    ToLower(): PrivateScope, Public, HideBySig
-    ToLower(CultureInfo): PrivateScope, Public, HideBySig
-    get_Length(): PrivateScope, Public, HideBySig, SpecialName
-    get_Chars(Int32): PrivateScope, Public, HideBySig, SpecialName
-    Contains(String): PrivateScope, Public, HideBySig
+    Substring(Int32): PrivateScope, Public, HideBySig
+    Substring(Int32, Int32): PrivateScope, Public, HideBySig
     Join(String, String[]): PrivateScope, Public, Static, HideBySig
     Join(String, Object[]): PrivateScope, Public, Static, HideBySig
     Join(String, IEnumerable`1): PrivateScope, Public, Static, HideBySig
@@ -2189,6 +2186,7 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     Equals(String, String, StringComparison): PrivateScope, Public, Static, HideBySig
     op_Equality(String, String): PrivateScope, Public, Static, HideBySig, SpecialName
     op_Inequality(String, String): PrivateScope, Public, Static, HideBySig, SpecialName
+    get_Chars(Int32): PrivateScope, Public, HideBySig, SpecialName
     CopyTo(Int32, Char[], Int32, Int32): PrivateScope, Public, HideBySig
     ToCharArray(): PrivateScope, Public, HideBySig
     ToCharArray(Int32, Int32): PrivateScope, Public, HideBySig
@@ -2197,6 +2195,7 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     UseRandomizedHashing(): PrivateScope, Assembly, Static, HideBySig
     GetHashCode(): PrivateScope, Public, Virtual, HideBySig
     GetLegacyNonRandomizedHashCode(): PrivateScope, Assembly, HideBySig
+    get_Length(): PrivateScope, Public, HideBySig, SpecialName
     Split(Char[]): PrivateScope, Public, HideBySig
     Split(Char[], Int32): PrivateScope, Public, HideBySig
     Split(Char[], StringSplitOptions): PrivateScope, Public, HideBySig
@@ -2204,8 +2203,6 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     SplitInternal(Char[], Int32, StringSplitOptions): PrivateScope, Assembly, HideBySig
     Split(String[], StringSplitOptions): PrivateScope, Public, HideBySig
     Split(String[], Int32, StringSplitOptions): PrivateScope, Public, HideBySig
-    Substring(Int32): PrivateScope, Public, HideBySig
-    Substring(Int32, Int32): PrivateScope, Public, HideBySig
     Trim(Char[]): PrivateScope, Public, HideBySig
     TrimStart(Char[]): PrivateScope, Public, HideBySig
     TrimEnd(Char[]): PrivateScope, Public, HideBySig
@@ -2232,6 +2229,7 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     CompareTo(String): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
     CompareOrdinal(String, String): PrivateScope, Public, Static, HideBySig
     CompareOrdinal(String, Int32, String, Int32, Int32): PrivateScope, Public, Static, HideBySig
+    Contains(String): PrivateScope, Public, HideBySig
     EndsWith(String): PrivateScope, Public, HideBySig
     EndsWith(String, StringComparison): PrivateScope, Public, HideBySig
     EndsWith(String, Boolean, CultureInfo): PrivateScope, Public, HideBySig
@@ -2264,6 +2262,8 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
     PadLeft(Int32, Char): PrivateScope, Public, HideBySig
     PadRight(Int32): PrivateScope, Public, HideBySig
     PadRight(Int32, Char): PrivateScope, Public, HideBySig
+    ToLower(): PrivateScope, Public, HideBySig
+    ToLower(CultureInfo): PrivateScope, Public, HideBySig
     ToLowerInvariant(): PrivateScope, Public, HideBySig
     ToUpper(): PrivateScope, Public, HideBySig
     ToUpper(CultureInfo): PrivateScope, Public, HideBySig
