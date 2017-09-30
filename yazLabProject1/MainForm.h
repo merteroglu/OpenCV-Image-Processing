@@ -87,12 +87,12 @@ namespace yazLabProject1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea6 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend6 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series21 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series22 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series23 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series24 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -300,36 +300,36 @@ namespace yazLabProject1 {
 			// 
 			// chart1
 			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea1);
-			legend1->Name = L"Legend1";
-			this->chart1->Legends->Add(legend1);
+			chartArea6->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea6);
+			legend6->Name = L"Legend1";
+			this->chart1->Legends->Add(legend6);
 			this->chart1->Location = System::Drawing::Point(296, 92);
 			this->chart1->Name = L"chart1";
-			series1->ChartArea = L"ChartArea1";
-			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series1->IsXValueIndexed = true;
-			series1->Legend = L"Legend1";
-			series1->Name = L"Histogram";
-			series2->ChartArea = L"ChartArea1";
-			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series2->IsXValueIndexed = true;
-			series2->Legend = L"Legend1";
-			series2->Name = L"Red";
-			series3->ChartArea = L"ChartArea1";
-			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series3->IsXValueIndexed = true;
-			series3->Legend = L"Legend1";
-			series3->Name = L"Blue";
-			series4->ChartArea = L"ChartArea1";
-			series4->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series4->IsXValueIndexed = true;
-			series4->Legend = L"Legend1";
-			series4->Name = L"Green";
-			this->chart1->Series->Add(series1);
-			this->chart1->Series->Add(series2);
-			this->chart1->Series->Add(series3);
-			this->chart1->Series->Add(series4);
+			series21->ChartArea = L"ChartArea1";
+			series21->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series21->IsXValueIndexed = true;
+			series21->Legend = L"Legend1";
+			series21->Name = L"Histogram";
+			series22->ChartArea = L"ChartArea1";
+			series22->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series22->IsXValueIndexed = true;
+			series22->Legend = L"Legend1";
+			series22->Name = L"Red";
+			series23->ChartArea = L"ChartArea1";
+			series23->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series23->IsXValueIndexed = true;
+			series23->Legend = L"Legend1";
+			series23->Name = L"Blue";
+			series24->ChartArea = L"ChartArea1";
+			series24->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series24->IsXValueIndexed = true;
+			series24->Legend = L"Legend1";
+			series24->Name = L"Green";
+			this->chart1->Series->Add(series21);
+			this->chart1->Series->Add(series22);
+			this->chart1->Series->Add(series23);
+			this->chart1->Series->Add(series24);
 			this->chart1->Size = System::Drawing::Size(387, 128);
 			this->chart1->TabIndex = 11;
 			this->chart1->Text = L"chart1";
@@ -384,7 +384,7 @@ namespace yazLabProject1 {
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Location = System::Drawing::Point(12, 79);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(528, 305);
+			this->panel1->Size = System::Drawing::Size(257, 276);
 			this->panel1->TabIndex = 17;
 			// 
 			// MainForm
