@@ -69,6 +69,8 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::Button^  btnRGBHistogram;
 	private: System::Windows::Forms::GroupBox^  groupBox2;
 	private: System::Windows::Forms::Panel^  panel1;
+	private: System::Windows::Forms::Button^  btnSave;
+
 
 
 
@@ -87,12 +89,13 @@ namespace yazLabProject1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea6 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend6 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series21 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series22 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series23 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series24 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea5 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend5 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series17 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series18 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series19 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series20 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -116,6 +119,7 @@ namespace yazLabProject1 {
 			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->btnSave = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
@@ -125,11 +129,12 @@ namespace yazLabProject1 {
 			// 
 			// btnOpen
 			// 
-			this->btnOpen->Location = System::Drawing::Point(10, 19);
+			this->btnOpen->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->btnOpen->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnOpen.Image")));
+			this->btnOpen->Location = System::Drawing::Point(10, 23);
 			this->btnOpen->Name = L"btnOpen";
-			this->btnOpen->Size = System::Drawing::Size(44, 38);
+			this->btnOpen->Size = System::Drawing::Size(39, 36);
 			this->btnOpen->TabIndex = 0;
-			this->btnOpen->Text = L"Resim Aç";
 			this->btnOpen->UseVisualStyleBackColor = true;
 			this->btnOpen->Click += gcnew System::EventHandler(this, &MainForm::btnOpen_Click);
 			// 
@@ -144,11 +149,11 @@ namespace yazLabProject1 {
 			// 
 			// btnNegative
 			// 
-			this->btnNegative->Location = System::Drawing::Point(60, 17);
+			this->btnNegative->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnNegative.Image")));
+			this->btnNegative->Location = System::Drawing::Point(100, 23);
 			this->btnNegative->Name = L"btnNegative";
-			this->btnNegative->Size = System::Drawing::Size(60, 42);
+			this->btnNegative->Size = System::Drawing::Size(39, 36);
 			this->btnNegative->TabIndex = 2;
-			this->btnNegative->Text = L"Negative/Invert";
 			this->btnNegative->UseVisualStyleBackColor = true;
 			this->btnNegative->Click += gcnew System::EventHandler(this, &MainForm::btnNegative_Click);
 			// 
@@ -164,51 +169,51 @@ namespace yazLabProject1 {
 			// 
 			// btnSagAynala
 			// 
-			this->btnSagAynala->Location = System::Drawing::Point(126, 21);
+			this->btnSagAynala->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSagAynala.Image")));
+			this->btnSagAynala->Location = System::Drawing::Point(145, 23);
 			this->btnSagAynala->Name = L"btnSagAynala";
-			this->btnSagAynala->Size = System::Drawing::Size(56, 36);
+			this->btnSagAynala->Size = System::Drawing::Size(39, 36);
 			this->btnSagAynala->TabIndex = 4;
-			this->btnSagAynala->Text = L"Aynala";
 			this->btnSagAynala->UseVisualStyleBackColor = true;
 			this->btnSagAynala->Click += gcnew System::EventHandler(this, &MainForm::btnSagAynala_Click);
 			// 
 			// btnSagaDondur
 			// 
-			this->btnSagaDondur->Location = System::Drawing::Point(188, 15);
+			this->btnSagaDondur->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSagaDondur.Image")));
+			this->btnSagaDondur->Location = System::Drawing::Point(190, 23);
 			this->btnSagaDondur->Name = L"btnSagaDondur";
-			this->btnSagaDondur->Size = System::Drawing::Size(72, 41);
+			this->btnSagaDondur->Size = System::Drawing::Size(39, 36);
 			this->btnSagaDondur->TabIndex = 5;
-			this->btnSagaDondur->Text = L"90 Derece Saða";
 			this->btnSagaDondur->UseVisualStyleBackColor = true;
 			this->btnSagaDondur->Click += gcnew System::EventHandler(this, &MainForm::btnSagaDondur_Click);
 			// 
 			// btnSolaDondur
 			// 
-			this->btnSolaDondur->Location = System::Drawing::Point(266, 15);
+			this->btnSolaDondur->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSolaDondur.Image")));
+			this->btnSolaDondur->Location = System::Drawing::Point(235, 23);
 			this->btnSolaDondur->Name = L"btnSolaDondur";
-			this->btnSolaDondur->Size = System::Drawing::Size(65, 41);
+			this->btnSolaDondur->Size = System::Drawing::Size(39, 36);
 			this->btnSolaDondur->TabIndex = 6;
-			this->btnSolaDondur->Text = L"90 Derece Sola";
 			this->btnSolaDondur->UseVisualStyleBackColor = true;
 			this->btnSolaDondur->Click += gcnew System::EventHandler(this, &MainForm::btnSolaDondur_Click);
 			// 
 			// btnGriTonlama
 			// 
-			this->btnGriTonlama->Location = System::Drawing::Point(337, 14);
+			this->btnGriTonlama->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnGriTonlama.Image")));
+			this->btnGriTonlama->Location = System::Drawing::Point(280, 23);
 			this->btnGriTonlama->Name = L"btnGriTonlama";
-			this->btnGriTonlama->Size = System::Drawing::Size(57, 43);
+			this->btnGriTonlama->Size = System::Drawing::Size(39, 36);
 			this->btnGriTonlama->TabIndex = 7;
-			this->btnGriTonlama->Text = L"Gri Tonlama";
 			this->btnGriTonlama->UseVisualStyleBackColor = true;
 			this->btnGriTonlama->Click += gcnew System::EventHandler(this, &MainForm::btnGriTonlama_Click);
 			// 
 			// btnReOpen
 			// 
-			this->btnReOpen->Location = System::Drawing::Point(400, 12);
+			this->btnReOpen->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnReOpen.Image")));
+			this->btnReOpen->Location = System::Drawing::Point(325, 23);
 			this->btnReOpen->Name = L"btnReOpen";
-			this->btnReOpen->Size = System::Drawing::Size(56, 47);
+			this->btnReOpen->Size = System::Drawing::Size(39, 36);
 			this->btnReOpen->TabIndex = 8;
-			this->btnReOpen->Text = L"Tekrar Aç";
 			this->btnReOpen->UseVisualStyleBackColor = true;
 			this->btnReOpen->Click += gcnew System::EventHandler(this, &MainForm::btnReOpen_Click);
 			// 
@@ -218,7 +223,7 @@ namespace yazLabProject1 {
 			this->groupBox1->Controls->Add(this->rButtonBlue);
 			this->groupBox1->Controls->Add(this->rButtonGreen);
 			this->groupBox1->Controls->Add(this->rButtonRed);
-			this->groupBox1->Location = System::Drawing::Point(727, 13);
+			this->groupBox1->Location = System::Drawing::Point(544, 17);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(236, 50);
 			this->groupBox1->TabIndex = 10;
@@ -273,7 +278,7 @@ namespace yazLabProject1 {
 			// 
 			// txtResizeX
 			// 
-			this->txtResizeX->Location = System::Drawing::Point(685, 14);
+			this->txtResizeX->Location = System::Drawing::Point(502, 23);
 			this->txtResizeX->Margin = System::Windows::Forms::Padding(2);
 			this->txtResizeX->Name = L"txtResizeX";
 			this->txtResizeX->Size = System::Drawing::Size(37, 20);
@@ -281,7 +286,7 @@ namespace yazLabProject1 {
 			// 
 			// txtResizeY
 			// 
-			this->txtResizeY->Location = System::Drawing::Point(686, 37);
+			this->txtResizeY->Location = System::Drawing::Point(502, 47);
 			this->txtResizeY->Margin = System::Windows::Forms::Padding(2);
 			this->txtResizeY->Name = L"txtResizeY";
 			this->txtResizeY->Size = System::Drawing::Size(36, 20);
@@ -289,47 +294,47 @@ namespace yazLabProject1 {
 			// 
 			// btnResize
 			// 
-			this->btnResize->Location = System::Drawing::Point(627, 13);
+			this->btnResize->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnResize.Image")));
+			this->btnResize->Location = System::Drawing::Point(459, 23);
 			this->btnResize->Margin = System::Windows::Forms::Padding(2);
 			this->btnResize->Name = L"btnResize";
-			this->btnResize->Size = System::Drawing::Size(54, 41);
+			this->btnResize->Size = System::Drawing::Size(39, 36);
 			this->btnResize->TabIndex = 13;
-			this->btnResize->Text = L"Resize";
 			this->btnResize->UseVisualStyleBackColor = true;
 			this->btnResize->Click += gcnew System::EventHandler(this, &MainForm::btnResize_Click);
 			// 
 			// chart1
 			// 
-			chartArea6->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea6);
-			legend6->Name = L"Legend1";
-			this->chart1->Legends->Add(legend6);
+			chartArea5->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea5);
+			legend5->Name = L"Legend1";
+			this->chart1->Legends->Add(legend5);
 			this->chart1->Location = System::Drawing::Point(296, 92);
 			this->chart1->Name = L"chart1";
-			series21->ChartArea = L"ChartArea1";
-			series21->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series21->IsXValueIndexed = true;
-			series21->Legend = L"Legend1";
-			series21->Name = L"Histogram";
-			series22->ChartArea = L"ChartArea1";
-			series22->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series22->IsXValueIndexed = true;
-			series22->Legend = L"Legend1";
-			series22->Name = L"Red";
-			series23->ChartArea = L"ChartArea1";
-			series23->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series23->IsXValueIndexed = true;
-			series23->Legend = L"Legend1";
-			series23->Name = L"Blue";
-			series24->ChartArea = L"ChartArea1";
-			series24->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series24->IsXValueIndexed = true;
-			series24->Legend = L"Legend1";
-			series24->Name = L"Green";
-			this->chart1->Series->Add(series21);
-			this->chart1->Series->Add(series22);
-			this->chart1->Series->Add(series23);
-			this->chart1->Series->Add(series24);
+			series17->ChartArea = L"ChartArea1";
+			series17->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series17->IsXValueIndexed = true;
+			series17->Legend = L"Legend1";
+			series17->Name = L"Histogram";
+			series18->ChartArea = L"ChartArea1";
+			series18->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series18->IsXValueIndexed = true;
+			series18->Legend = L"Legend1";
+			series18->Name = L"Red";
+			series19->ChartArea = L"ChartArea1";
+			series19->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series19->IsXValueIndexed = true;
+			series19->Legend = L"Legend1";
+			series19->Name = L"Blue";
+			series20->ChartArea = L"ChartArea1";
+			series20->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series20->IsXValueIndexed = true;
+			series20->Legend = L"Legend1";
+			series20->Name = L"Green";
+			this->chart1->Series->Add(series17);
+			this->chart1->Series->Add(series18);
+			this->chart1->Series->Add(series19);
+			this->chart1->Series->Add(series20);
 			this->chart1->Size = System::Drawing::Size(387, 128);
 			this->chart1->TabIndex = 11;
 			this->chart1->Text = L"chart1";
@@ -337,26 +342,27 @@ namespace yazLabProject1 {
 			// 
 			// btnCreateGrayHistogram
 			// 
-			this->btnCreateGrayHistogram->Location = System::Drawing::Point(462, 14);
+			this->btnCreateGrayHistogram->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnCreateGrayHistogram.Image")));
+			this->btnCreateGrayHistogram->Location = System::Drawing::Point(370, 23);
 			this->btnCreateGrayHistogram->Name = L"btnCreateGrayHistogram";
-			this->btnCreateGrayHistogram->Size = System::Drawing::Size(75, 44);
+			this->btnCreateGrayHistogram->Size = System::Drawing::Size(39, 36);
 			this->btnCreateGrayHistogram->TabIndex = 14;
-			this->btnCreateGrayHistogram->Text = L"Create Gray Histogram";
 			this->btnCreateGrayHistogram->UseVisualStyleBackColor = true;
 			this->btnCreateGrayHistogram->Click += gcnew System::EventHandler(this, &MainForm::btnCreateGrayHistogram_Click);
 			// 
 			// btnRGBHistogram
 			// 
-			this->btnRGBHistogram->Location = System::Drawing::Point(543, 14);
+			this->btnRGBHistogram->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnRGBHistogram.Image")));
+			this->btnRGBHistogram->Location = System::Drawing::Point(415, 23);
 			this->btnRGBHistogram->Name = L"btnRGBHistogram";
-			this->btnRGBHistogram->Size = System::Drawing::Size(78, 41);
+			this->btnRGBHistogram->Size = System::Drawing::Size(39, 36);
 			this->btnRGBHistogram->TabIndex = 15;
-			this->btnRGBHistogram->Text = L"Create RGB Histogram";
 			this->btnRGBHistogram->UseVisualStyleBackColor = true;
 			this->btnRGBHistogram->Click += gcnew System::EventHandler(this, &MainForm::btnRGBHistogram_Click);
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->btnSave);
 			this->groupBox2->Controls->Add(this->btnOpen);
 			this->groupBox2->Controls->Add(this->btnRGBHistogram);
 			this->groupBox2->Controls->Add(this->groupBox1);
@@ -372,7 +378,7 @@ namespace yazLabProject1 {
 			this->groupBox2->Controls->Add(this->btnReOpen);
 			this->groupBox2->Location = System::Drawing::Point(2, 3);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(1030, 70);
+			this->groupBox2->Size = System::Drawing::Size(1350, 83);
 			this->groupBox2->TabIndex = 16;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Menu";
@@ -380,12 +386,21 @@ namespace yazLabProject1 {
 			// panel1
 			// 
 			this->panel1->AutoScroll = true;
-			this->panel1->AutoSize = true;
+			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Location = System::Drawing::Point(12, 79);
+			this->panel1->Location = System::Drawing::Point(12, 92);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(257, 276);
+			this->panel1->Size = System::Drawing::Size(1350, 650);
 			this->panel1->TabIndex = 17;
+			// 
+			// btnSave
+			// 
+			this->btnSave->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSave.Image")));
+			this->btnSave->Location = System::Drawing::Point(55, 23);
+			this->btnSave->Name = L"btnSave";
+			this->btnSave->Size = System::Drawing::Size(39, 36);
+			this->btnSave->TabIndex = 16;
+			this->btnSave->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
