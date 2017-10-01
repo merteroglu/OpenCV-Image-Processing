@@ -4,6 +4,7 @@
 #include <opencv2\highgui\highgui.hpp>
 #include <string>
 #include <msclr\marshal_cppstd.h>
+#include "inputDialogBox.h"
 
 namespace yazLabProject1 {
 
@@ -61,8 +62,8 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::RadioButton^  rButtonBlue;
 	private: System::Windows::Forms::RadioButton^  rButtonGreen;
 	private: System::Windows::Forms::RadioButton^  rButtonRed;
-	private: System::Windows::Forms::TextBox^  txtResizeX;
-	private: System::Windows::Forms::TextBox^  txtResizeY;
+
+
 	private: System::Windows::Forms::Button^  btnResize;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
 	private: System::Windows::Forms::Button^  btnCreateGrayHistogram;
@@ -90,12 +91,12 @@ namespace yazLabProject1 {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea5 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend5 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series17 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series18 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series19 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series20 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -111,15 +112,13 @@ namespace yazLabProject1 {
 			this->rButtonBlue = (gcnew System::Windows::Forms::RadioButton());
 			this->rButtonGreen = (gcnew System::Windows::Forms::RadioButton());
 			this->rButtonRed = (gcnew System::Windows::Forms::RadioButton());
-			this->txtResizeX = (gcnew System::Windows::Forms::TextBox());
-			this->txtResizeY = (gcnew System::Windows::Forms::TextBox());
 			this->btnResize = (gcnew System::Windows::Forms::Button());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->btnCreateGrayHistogram = (gcnew System::Windows::Forms::Button());
 			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
@@ -160,7 +159,7 @@ namespace yazLabProject1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(648, 76);
+			this->label1->Location = System::Drawing::Point(767, 35);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
@@ -223,7 +222,7 @@ namespace yazLabProject1 {
 			this->groupBox1->Controls->Add(this->rButtonBlue);
 			this->groupBox1->Controls->Add(this->rButtonGreen);
 			this->groupBox1->Controls->Add(this->rButtonRed);
-			this->groupBox1->Location = System::Drawing::Point(544, 17);
+			this->groupBox1->Location = System::Drawing::Point(503, 19);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(236, 50);
 			this->groupBox1->TabIndex = 10;
@@ -276,22 +275,6 @@ namespace yazLabProject1 {
 			this->rButtonRed->UseVisualStyleBackColor = true;
 			this->rButtonRed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonRed_CheckedChanged);
 			// 
-			// txtResizeX
-			// 
-			this->txtResizeX->Location = System::Drawing::Point(502, 23);
-			this->txtResizeX->Margin = System::Windows::Forms::Padding(2);
-			this->txtResizeX->Name = L"txtResizeX";
-			this->txtResizeX->Size = System::Drawing::Size(37, 20);
-			this->txtResizeX->TabIndex = 11;
-			// 
-			// txtResizeY
-			// 
-			this->txtResizeY->Location = System::Drawing::Point(502, 47);
-			this->txtResizeY->Margin = System::Windows::Forms::Padding(2);
-			this->txtResizeY->Name = L"txtResizeY";
-			this->txtResizeY->Size = System::Drawing::Size(36, 20);
-			this->txtResizeY->TabIndex = 12;
-			// 
 			// btnResize
 			// 
 			this->btnResize->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnResize.Image")));
@@ -305,36 +288,36 @@ namespace yazLabProject1 {
 			// 
 			// chart1
 			// 
-			chartArea5->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea5);
-			legend5->Name = L"Legend1";
-			this->chart1->Legends->Add(legend5);
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
 			this->chart1->Location = System::Drawing::Point(296, 92);
 			this->chart1->Name = L"chart1";
-			series17->ChartArea = L"ChartArea1";
-			series17->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series17->IsXValueIndexed = true;
-			series17->Legend = L"Legend1";
-			series17->Name = L"Histogram";
-			series18->ChartArea = L"ChartArea1";
-			series18->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series18->IsXValueIndexed = true;
-			series18->Legend = L"Legend1";
-			series18->Name = L"Red";
-			series19->ChartArea = L"ChartArea1";
-			series19->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series19->IsXValueIndexed = true;
-			series19->Legend = L"Legend1";
-			series19->Name = L"Blue";
-			series20->ChartArea = L"ChartArea1";
-			series20->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series20->IsXValueIndexed = true;
-			series20->Legend = L"Legend1";
-			series20->Name = L"Green";
-			this->chart1->Series->Add(series17);
-			this->chart1->Series->Add(series18);
-			this->chart1->Series->Add(series19);
-			this->chart1->Series->Add(series20);
+			series1->ChartArea = L"ChartArea1";
+			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series1->IsXValueIndexed = true;
+			series1->Legend = L"Legend1";
+			series1->Name = L"Histogram";
+			series2->ChartArea = L"ChartArea1";
+			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series2->IsXValueIndexed = true;
+			series2->Legend = L"Legend1";
+			series2->Name = L"Red";
+			series3->ChartArea = L"ChartArea1";
+			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series3->IsXValueIndexed = true;
+			series3->Legend = L"Legend1";
+			series3->Name = L"Blue";
+			series4->ChartArea = L"ChartArea1";
+			series4->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series4->IsXValueIndexed = true;
+			series4->Legend = L"Legend1";
+			series4->Name = L"Green";
+			this->chart1->Series->Add(series1);
+			this->chart1->Series->Add(series2);
+			this->chart1->Series->Add(series3);
+			this->chart1->Series->Add(series4);
 			this->chart1->Size = System::Drawing::Size(387, 128);
 			this->chart1->TabIndex = 11;
 			this->chart1->Text = L"chart1";
@@ -365,10 +348,9 @@ namespace yazLabProject1 {
 			this->groupBox2->Controls->Add(this->btnSave);
 			this->groupBox2->Controls->Add(this->btnOpen);
 			this->groupBox2->Controls->Add(this->btnRGBHistogram);
+			this->groupBox2->Controls->Add(this->label1);
 			this->groupBox2->Controls->Add(this->groupBox1);
-			this->groupBox2->Controls->Add(this->txtResizeY);
 			this->groupBox2->Controls->Add(this->btnResize);
-			this->groupBox2->Controls->Add(this->txtResizeX);
 			this->groupBox2->Controls->Add(this->btnNegative);
 			this->groupBox2->Controls->Add(this->btnCreateGrayHistogram);
 			this->groupBox2->Controls->Add(this->btnSagAynala);
@@ -383,6 +365,15 @@ namespace yazLabProject1 {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Menu";
 			// 
+			// btnSave
+			// 
+			this->btnSave->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSave.Image")));
+			this->btnSave->Location = System::Drawing::Point(55, 23);
+			this->btnSave->Name = L"btnSave";
+			this->btnSave->Size = System::Drawing::Size(39, 36);
+			this->btnSave->TabIndex = 16;
+			this->btnSave->UseVisualStyleBackColor = true;
+			// 
 			// panel1
 			// 
 			this->panel1->AutoScroll = true;
@@ -393,25 +384,15 @@ namespace yazLabProject1 {
 			this->panel1->Size = System::Drawing::Size(1350, 650);
 			this->panel1->TabIndex = 17;
 			// 
-			// btnSave
-			// 
-			this->btnSave->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSave.Image")));
-			this->btnSave->Location = System::Drawing::Point(55, 23);
-			this->btnSave->Name = L"btnSave";
-			this->btnSave->Size = System::Drawing::Size(39, 36);
-			this->btnSave->TabIndex = 16;
-			this->btnSave->UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(1008, 561);
+			this->ClientSize = System::Drawing::Size(1025, 578);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->chart1);
-			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
@@ -424,7 +405,6 @@ namespace yazLabProject1 {
 			this->groupBox2->PerformLayout();
 			this->panel1->ResumeLayout(false);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -677,36 +657,50 @@ private: System::Void rButtonOrjinal_CheckedChanged(System::Object^  sender, Sys
 }
 private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs^  e) {
 
-	int newWidth = Convert::ToInt32(txtResizeX->Text);
-	int newHeight = Convert::ToInt32(txtResizeY->Text);
-	
-	cv::Size newSize = cv::Size(newHeight, newWidth);
-	Mat newImg = Mat::zeros(newSize, img.type());
+	inputDialogBox ^ form = gcnew inputDialogBox;
 
-	int imgX, imgY;
+	form->ShowDialog();
 
-	for (int i = 0; i <newWidth; i++) {
-		for (int j = 0; j <newHeight; j++) {
+	int newWidth, newHeight;
 
-			imgX = (int) (round ( ((float) i) / (float) newWidth * (float)img.cols));
-			imgY = int(round( ((float) j) / (float) newHeight * (float)img.rows));
-			imgX = min(imgX, img.cols - 1);
-			imgY = min(imgY, img.rows - 1);
+	if (form->isOkey) {
+		newWidth = form->width;
+		newHeight = form->height;
 
-			cv::Vec3b myVec = img.at<cv::Vec3b>(imgY, imgX);
-			uchar tempR = myVec[2];
-			uchar tempG = myVec[1];
-			uchar tempB = myVec[0];
-			cv::Vec3b newPoint(tempB, tempG, tempR);
-			newImg.at<cv::Vec3b>(j, i) = newPoint;
+		cv::Size newSize = cv::Size(newHeight, newWidth);
+		Mat newImg = Mat::zeros(newSize, img.type());
 
+		int imgX, imgY;
+
+		for (int i = 0; i <newWidth; i++) {
+			for (int j = 0; j <newHeight; j++) {
+
+				imgX = (int)(round(((float)i) / (float)newWidth * (float)img.cols));
+				imgY = int(round(((float)j) / (float)newHeight * (float)img.rows));
+				imgX = min(imgX, img.cols - 1);
+				imgY = min(imgY, img.rows - 1);
+
+				cv::Vec3b myVec = img.at<cv::Vec3b>(imgY, imgX);
+				uchar tempR = myVec[2];
+				uchar tempG = myVec[1];
+				uchar tempB = myVec[0];
+				cv::Vec3b newPoint(tempB, tempG, tempR);
+				newImg.at<cv::Vec3b>(j, i) = newPoint;
+
+			}
 		}
+		img = newImg;
+		tempImg = img;
+		pictureBox1->Width = img.size().width;
+		pictureBox1->Height = img.size().height;
+		DrawCVImage(pictureBox1, img);
+
 	}
-	img = newImg;
-	tempImg = img;
-	pictureBox1->Width = img.size().width;
-	pictureBox1->Height = img.size().height;
-	DrawCVImage(pictureBox1, img);
+
+	//int newWidth = Convert::ToInt32(txtResizeX->Text);
+	//int newHeight = Convert::ToInt32(txtResizeY->Text);
+	
+	
 	//imshow("resize" ,newImg);
 
 }
