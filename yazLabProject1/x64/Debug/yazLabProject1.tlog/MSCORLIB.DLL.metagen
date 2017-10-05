@@ -1091,12 +1091,12 @@ Class System.AppContextSwitches: AutoLayout, AnsiClass, Class, Abstract, Sealed
 Class System.Object: AutoLayout, AnsiClass, Class, Public, Serializable, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Methods:
+    GetType(): PrivateScope, Public, HideBySig
+    GetHashCode(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
     ToString(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
     Equals(Object): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
     Equals(Object, Object): PrivateScope, Public, Static, HideBySig
     ReferenceEquals(Object, Object): PrivateScope, Public, Static, HideBySig
-    GetHashCode(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask
-    GetType(): PrivateScope, Public, HideBySig
 Class System.__Canon: AutoLayout, AnsiClass, Class, Serializable, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Interface System.ICloneable: AutoLayout, AnsiClass, Class, Public, ClassSemanticsMask, Abstract
@@ -2160,9 +2160,9 @@ Class System.String: AutoLayout, AnsiClass, Class, Public, Sealed, Serializable,
   Fields:
     System.String Empty : Public, Static, InitOnly
   Properties:
+    Int32 Length 'get ' : 
     Char FirstChar 'get ' : 
     Char Chars [Int32] 'get ' : 
-    Int32 Length 'get ' : 
   Methods:
     IsNullOrEmpty(String): PrivateScope, Public, Static, HideBySig
     StartsWith(String): PrivateScope, Public, HideBySig
@@ -3983,6 +3983,8 @@ Struct System.Char: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Seal
     Int32 HIGH_SURROGATE_START = 55296 : Assembly, Static, Literal, HasDefault
     Int32 LOW_SURROGATE_END = 57343 : Assembly, Static, Literal, HasDefault
   Methods:
+    ToLower(Char, CultureInfo): PrivateScope, Public, Static, HideBySig
+    ToLower(Char): PrivateScope, Public, Static, HideBySig
     GetHashCode(): PrivateScope, Public, Virtual, HideBySig
     Equals(Object): PrivateScope, Public, Virtual, HideBySig
     Equals(Char): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
@@ -4006,8 +4008,6 @@ Struct System.Char: AutoLayout, AnsiClass, Class, Public, SequentialLayout, Seal
     ToUpper(Char, CultureInfo): PrivateScope, Public, Static, HideBySig
     ToUpper(Char): PrivateScope, Public, Static, HideBySig
     ToUpperInvariant(Char): PrivateScope, Public, Static, HideBySig
-    ToLower(Char, CultureInfo): PrivateScope, Public, Static, HideBySig
-    ToLower(Char): PrivateScope, Public, Static, HideBySig
     ToLowerInvariant(Char): PrivateScope, Public, Static, HideBySig
     GetTypeCode(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
     IsControl(Char): PrivateScope, Public, Static, HideBySig
@@ -14439,10 +14439,6 @@ Class System.Security.Principal.WindowsIdentity: AutoLayout, AnsiClass, Class, P
     System.Collections.Generic.IEnumerable`1[System.Security.Claims.Claim] DeviceClaims 'get ' : 
     System.Collections.Generic.IEnumerable`1[System.Security.Claims.Claim] Claims 'get ' : 
   Methods:
-    GetCurrent(): PrivateScope, Public, Static, HideBySig, HasSecurity
-    GetCurrent(Boolean): PrivateScope, Public, Static, HideBySig, HasSecurity
-    GetCurrent(TokenAccessLevels): PrivateScope, Public, Static, HideBySig, HasSecurity
-    GetAnonymous(): PrivateScope, Public, Static, HideBySig
     get_AuthenticationType(): PrivateScope, Public, Final, Virtual, HideBySig, SpecialName
     get_ImpersonationLevel(): PrivateScope, Public, HideBySig, SpecialName
     get_IsAuthenticated(): PrivateScope, Public, Virtual, HideBySig, SpecialName
@@ -14450,18 +14446,25 @@ Class System.Security.Principal.WindowsIdentity: AutoLayout, AnsiClass, Class, P
     get_IsSystem(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
     get_IsAnonymous(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
     get_Name(): PrivateScope, Public, Virtual, HideBySig, SpecialName
-    GetName(): PrivateScope, Assembly, HideBySig, RequireSecObject
     get_Owner(): PrivateScope, Public, HideBySig, SpecialName
     get_User(): PrivateScope, Public, HideBySig, SpecialName
     get_Groups(): PrivateScope, Public, HideBySig, SpecialName
     get_Token(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName, HasSecurity
+    get_AccessToken(): PrivateScope, Public, HideBySig, SpecialName
+    get_UserClaims(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_DeviceClaims(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
+    get_Claims(): PrivateScope, Public, Virtual, HideBySig, SpecialName
+    GetCurrent(): PrivateScope, Public, Static, HideBySig, HasSecurity
+    GetCurrent(Boolean): PrivateScope, Public, Static, HideBySig, HasSecurity
+    GetCurrent(TokenAccessLevels): PrivateScope, Public, Static, HideBySig, HasSecurity
+    GetAnonymous(): PrivateScope, Public, Static, HideBySig
+    GetName(): PrivateScope, Assembly, HideBySig, RequireSecObject
     RunImpersonated(SafeAccessTokenHandle, Action): PrivateScope, Public, Static, HideBySig, RequireSecObject
     RunImpersonated(SafeAccessTokenHandle, Func`1): PrivateScope, Public, Static, HideBySig, RequireSecObject
     Impersonate(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, RequireSecObject
     Impersonate(IntPtr): PrivateScope, Public, Static, HideBySig, HasSecurity, RequireSecObject
     Impersonate(StackCrawlMark&): PrivateScope, Assembly, HideBySig
     Dispose(): PrivateScope, Public, Final, Virtual, HideBySig, VtableLayoutMask
-    get_AccessToken(): PrivateScope, Public, HideBySig, SpecialName
     SafeRevertToSelf(StackCrawlMark&): PrivateScope, Assembly, Static, HideBySig
     SafeImpersonate(SafeAccessTokenHandle, WindowsIdentity, StackCrawlMark&): PrivateScope, Assembly, Static, HideBySig
     GetCurrentThreadWI(): PrivateScope, Assembly, Static, HideBySig
@@ -14473,9 +14476,6 @@ Class System.Security.Principal.WindowsIdentity: AutoLayout, AnsiClass, Class, P
     GetTokenInternal(): PrivateScope, Assembly, HideBySig
     CloneAsBase(): PrivateScope, Assembly, HideBySig
     Clone(): PrivateScope, Public, Virtual, HideBySig
-    get_UserClaims(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
-    get_DeviceClaims(): PrivateScope, Public, Virtual, HideBySig, VtableLayoutMask, SpecialName
-    get_Claims(): PrivateScope, Public, Virtual, HideBySig, SpecialName
 Struct System.Security.Principal.KerbLogonSubmitType: AutoLayout, AnsiClass, Class, Sealed, Serializable
   :System.Enum
   Fields:

@@ -710,8 +710,9 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 	int newWidth, newHeight;
 
 	if (form->isOkey) {
-		newWidth = form->width;
-		newHeight = form->height;
+		newHeight = form->width;
+		newWidth = form->height;
+		
 
 		try {
 			cv::Size newSize = cv::Size(newHeight, newWidth);
@@ -720,11 +721,11 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 
 			int imgX, imgY;
 
-			for (int i = 0; i <newWidth; i++) {
-				for (int j = 0; j <newHeight; j++) {
+			for (int i = 0; i <newHeight; i++) {
+				for (int j = 0; j <newWidth; j++) {
 
 					imgX = (int)(round(((float)i) / (float)newWidth * (float)img.cols));
-					imgY = int(round(((float)j) / (float)newHeight * (float)img.rows));
+					imgY = (int)(round(((float)j) / (float)newHeight * (float)img.rows));
 					imgX = min(imgX, img.cols - 1);
 					imgY = min(imgY, img.rows - 1);
 

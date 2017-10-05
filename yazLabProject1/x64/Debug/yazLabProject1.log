@@ -1,9 +1,13 @@
 ﻿  MainForm.cpp
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(528): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(529): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(517): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(518): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(522): warning C4101: 'e': unreferenced local variable
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(559): warning C4101: 'e': unreferenced local variable
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(589): warning C4101: 'e': unreferenced local variable
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(620): warning C4101: 'e': unreferenced local variable
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(674): warning C4101: 'e': unreferenced local variable
+c:\users\yagiz\documents\github\opencv-image-processing\yazlabproject1\MainForm.h(747): warning C4101: 'e': unreferenced local variable
 MainForm.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-  inputDialogBox.cpp
-  Generating Code...
 c:\opencv\build\include\opencv2\core\cvstd.hpp(596): warning C4793: 'cv::String::String': function compiled as native:
   	Found an intrinsic not supported in managed code
 c:\opencv\build\include\opencv2\core\mat.inl.hpp(413): warning C4793: 'cv::Mat::Mat': function compiled as native:
@@ -20,4 +24,4 @@ c:\opencv\build\include\opencv2\core\ptr.inl.hpp(72): warning C4793: 'cv::detail
   	Found an intrinsic not supported in managed code
 c:\opencv\build\include\opencv2\core\mat.inl.hpp(601): warning C4793: 'cv::Mat::operator=': function compiled as native:
   	Found an intrinsic not supported in managed code
-  yazLabProject1.vcxproj -> D:\Github\OpenCV-Image-Processing\x64\Debug\yazLabProject1.exe
+  yazLabProject1.vcxproj -> C:\Users\yagiz\Documents\GitHub\OpenCV-Image-Processing\x64\Debug\yazLabProject1.exe
