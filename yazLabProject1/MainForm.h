@@ -413,7 +413,7 @@ namespace yazLabProject1 {
 	private: System::Void btnOpen_Click(System::Object^  sender, System::EventArgs^  e) {
 		
 		
-		openFileDialog1->Filter = "Image Files|*.*|*.jpg|*.png|*.jpeg|";
+		openFileDialog1->Filter = "Image Files |*.*|Jpg |*.jpg|Png |*.png|Jpeg |*.jpeg";
 		openFileDialog1->Title = "Resim Dosyasýný seçiniz";
 
 		if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
@@ -447,6 +447,9 @@ namespace yazLabProject1 {
 	
     private: System::Void btnNegative_Click(System::Object^  sender, System::EventArgs^  e) {
 		
+		if (img.empty())
+			return;
+
 		Mat negativeImg = Mat::zeros(img.size(), img.type());
 
 		label1->Text = "image rows:" + img.rows.ToString() + " image cols:" + img.cols.ToString() + " image size :" + img.size().width + "," + img.size().height;		
@@ -479,6 +482,9 @@ namespace yazLabProject1 {
 
     private: System::Void btnSagAynala_Click(System::Object^  sender, System::EventArgs^  e) {
 		
+		if (img.empty())
+			return;
+
 		Mat aynalananImg = Mat::zeros(img.size(), img.type());
 		int i,j;
 		
@@ -502,96 +508,129 @@ namespace yazLabProject1 {
 
 
 	 void DrawCVImage(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
-		 System::Drawing::Graphics^ graphics = control->CreateGraphics();
-		 System::IntPtr ptr(colorImage.ptr());
-		 System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step, System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
-		 System::Drawing::RectangleF rect(0, 0, control->Width, control->Height);
-		 graphics->DrawImage(b, rect);
-		 delete graphics;
+		 if (img.empty())
+			 return;
+
+		 try {
+			 System::Drawing::Graphics^ graphics = control->CreateGraphics();
+			 System::IntPtr ptr(colorImage.ptr());
+			 System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step, System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
+			 System::Drawing::RectangleF rect(0, 0, control->Width, control->Height);
+			 graphics->DrawImage(b, rect);
+			 delete graphics;
+		 }
+		 catch(System::Exception ^e){
+			// MessageBox::Show("Resim Gösterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		 }
+
+		
 	 }
 
 
 
 
 private: System::Void btnSagaDondur_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	if (img.empty())
+		return;
+
 	cv::Size newSize =  cv::Size(img.size().height, img.size().width);
 	Mat transpozeImg = Mat::zeros(newSize, img.type());
 	Mat dondurulenImg = Mat::zeros(newSize, img.type());
 	int i, j;
 
-	label1->Text = " w ve h :" + img.rows.ToString() + " , " + img.cols.ToString();
 		
+	try {
 		for (i = 0; i < img.rows; i++) {
 			for (j = 0; j < img.cols; j++) {
 				dondurulenImg.at<cv::Vec3b>(j, i) = img.at<cv::Vec3b>(img.rows - i-1, j);
 			}
 		}
-	
-	
-			//label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
-	img = dondurulenImg;
-	tempImg = img;
-	pictureBox1->Width = img.size().width;
-	pictureBox1->Height = img.size().height;
 
-			//imshow("dondurulen", dondurulenImg);
-	DrawCVImage(pictureBox1, img);
+		img = dondurulenImg;
+		tempImg = img;
+		pictureBox1->Width = img.size().width;
+		pictureBox1->Height = img.size().height;
+
+		//imshow("dondurulen", dondurulenImg);
+		DrawCVImage(pictureBox1, img);
+
+	}
+	catch (System::Exception^ e) {
+		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 
 }
 
 
 private: System::Void btnSolaDondur_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	if (img.empty())
+		return;
+
 	cv::Size newSize = cv::Size(img.size().height, img.size().width);
 	Mat dondurulenImg = Mat::zeros(newSize, img.type());
 	int i, j;
 
-	for (i = 0; i < img.rows; i++) {
-		for (j = 0; j < img.cols; j++) {
-			//dondurulenImg.at<cv::Vec3b>(j,i) = img.at<cv::Vec3b>(i, img.cols - j - 1);
-			dondurulenImg.at<cv::Vec3b>(img.cols - j - 1, i) = img.at<cv::Vec3b>(i, j);
+	try {
+		for (i = 0; i < img.rows; i++) {
+			for (j = 0; j < img.cols; j++) {
+				dondurulenImg.at<cv::Vec3b>(img.cols - j - 1, i) = img.at<cv::Vec3b>(i, j);
+			}
 		}
+		label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
+		img = dondurulenImg;
+		tempImg = img;
+		pictureBox1->Width = img.size().width;
+		pictureBox1->Height = img.size().height;
+
+		DrawCVImage(pictureBox1, img);
+	}
+	catch (System::Exception ^e) {
+		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
-	label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
-	img = dondurulenImg;
-	tempImg = img;
-	pictureBox1->Width = img.size().width;
-	pictureBox1->Height = img.size().height;
-
-	//imshow("dondurulen", img);
-	DrawCVImage(pictureBox1, img);
+	
 }
 
 
 
 private: System::Void btnGriTonlama_Click(System::Object^  sender, System::EventArgs^  e) {
-	Mat newImg = Mat::zeros(img.size(), img.type());
 
-	//Mat C = (Mat_<double>(3, 3) << 0.412453, 0.357580, 0.180423, 0.212671, 0.715160, 0.072169, 0.019334, 0.119193, 0.950227);
+	if (img.empty())
+		return;
 
-	int i, j;
-
-	for (i = 0; i < img.rows; i++) {
-		for (j = 0; j < img.cols; j++) {
-			cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
-			uchar temp = (myVec[0] + myVec[1] + myVec[2]) / 3;
-			cv::Vec3b newPoint(temp, temp, temp);
-			newImg.at<cv::Vec3b>(i, j) = newPoint;
+	try {
+		Mat newImg = Mat::zeros(img.size(), img.type());
+		int i, j;
+		for (i = 0; i < img.rows; i++) {
+			for (j = 0; j < img.cols; j++) {
+				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+				uchar temp = (myVec[0] + myVec[1] + myVec[2]) / 3;
+				cv::Vec3b newPoint(temp, temp, temp);
+				newImg.at<cv::Vec3b>(i, j) = newPoint;
+			}
 		}
+
+		img = newImg;
+		tempImg = img;
+		//imshow("dondurulen", img);
+		DrawCVImage(pictureBox1, newImg);
 	}
-	
-	img = newImg;
-	tempImg = img;
-	//imshow("dondurulen", img);
-	DrawCVImage(pictureBox1, newImg);
+	catch(System::Exception ^e){
+		MessageBox::Show("Gri Tonlama Yapýlamadý", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	if (path == NULL)
+		return;
+
 	img = imread(path);
 	tempImg = img;
 	pictureBox1->Width = img.size().width;
 	pictureBox1->Height = img.size().height;
-	//pictureBox1->Load(managed);
 	System::String ^ managed = openFileDialog1->FileName;
 	pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
 	pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
@@ -599,38 +638,42 @@ private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs
 }
 
 void setRGBChannels(int type) {
-	Mat newImg = Mat::zeros(img.size(), img.type());
-	img = tempImg;
-	int i, j;
+	if (img.empty())
+		return;
 
-	for (i = 0; i < img.rows; i++) {
-		for (j = 0; j < img.cols; j++) {
-			cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
-			//uchar temp = (myVec[0] + myVec[1] + myVec[2]) / 3;
-			uchar tempR = myVec[2];
-			uchar tempG = myVec[1];
-			uchar tempB = myVec[0];
-			if (type == 0) {
-				tempR = 255;
+	try {
+		Mat newImg = Mat::zeros(img.size(), img.type());
+		img = tempImg;
+		for (int i = 0; i < img.rows; i++) {
+			for (int j = 0; j < img.cols; j++) {
+				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+				//uchar temp = (myVec[0] + myVec[1] + myVec[2]) / 3;
+				uchar tempR = myVec[2];
+				uchar tempG = myVec[1];
+				uchar tempB = myVec[0];
+				if (type == 0) {
+					tempR = 255;
+				}
+				else if (type == 1) {
+					tempG = 255;
+				}
+				else if (type == 2) {
+					tempB = 255;
+				}
+				else if (type == 3) {
+					img = tempImg;
+				}
+				cv::Vec3b newPoint(tempB, tempG, tempR);
+				newImg.at<cv::Vec3b>(i, j) = newPoint;
 			}
-			else if (type == 1) {
-				tempG = 255;
-			}
-			else if (type == 2) {
-				tempB = 255;
-			}
-			else if (type == 3) {
-				img = tempImg;
-			}
-
-			cv::Vec3b newPoint(tempB, tempG, tempR);
-			newImg.at<cv::Vec3b>(i, j) = newPoint;
 		}
+		img = newImg;
+		DrawCVImage(pictureBox1, newImg);
+
 	}
-	img = newImg;
-	DrawCVImage(pictureBox1, newImg);
-
-
+	catch (System::Exception ^e) {
+		MessageBox::Show("RGB Kanallarý deðiþtirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 
 
@@ -657,6 +700,9 @@ private: System::Void rButtonOrjinal_CheckedChanged(System::Object^  sender, Sys
 }
 private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs^  e) {
 
+	if (img.empty())
+		return;
+
 	inputDialogBox ^ form = gcnew inputDialogBox;
 
 	form->ShowDialog();
@@ -667,43 +713,44 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 		newWidth = form->width;
 		newHeight = form->height;
 
-		cv::Size newSize = cv::Size(newHeight, newWidth);
-		Mat newImg = Mat::zeros(newSize, img.type());
+		try {
+			cv::Size newSize = cv::Size(newHeight, newWidth);
 
-		int imgX, imgY;
+			Mat newImg = Mat::zeros(newSize, img.type());
 
-		for (int i = 0; i <newWidth; i++) {
-			for (int j = 0; j <newHeight; j++) {
+			int imgX, imgY;
 
-				imgX = (int)(round(((float)i) / (float)newWidth * (float)img.cols));
-				imgY = int(round(((float)j) / (float)newHeight * (float)img.rows));
-				imgX = min(imgX, img.cols - 1);
-				imgY = min(imgY, img.rows - 1);
+			for (int i = 0; i <newWidth; i++) {
+				for (int j = 0; j <newHeight; j++) {
 
-				cv::Vec3b myVec = img.at<cv::Vec3b>(imgY, imgX);
-				uchar tempR = myVec[2];
-				uchar tempG = myVec[1];
-				uchar tempB = myVec[0];
-				cv::Vec3b newPoint(tempB, tempG, tempR);
-				newImg.at<cv::Vec3b>(j, i) = newPoint;
+					imgX = (int)(round(((float)i) / (float)newWidth * (float)img.cols));
+					imgY = int(round(((float)j) / (float)newHeight * (float)img.rows));
+					imgX = min(imgX, img.cols - 1);
+					imgY = min(imgY, img.rows - 1);
 
+					cv::Vec3b myVec = img.at<cv::Vec3b>(imgY, imgX);
+					uchar tempR = myVec[2];
+					uchar tempG = myVec[1];
+					uchar tempB = myVec[0];
+					cv::Vec3b newPoint(tempB, tempG, tempR);
+					newImg.at<cv::Vec3b>(j, i) = newPoint;
+
+				}
 			}
+			img = newImg;
+			tempImg = img;
+			pictureBox1->Width = img.size().width;
+			pictureBox1->Height = img.size().height;
+			DrawCVImage(pictureBox1, img);
 		}
-		img = newImg;
-		tempImg = img;
-		pictureBox1->Width = img.size().width;
-		pictureBox1->Height = img.size().height;
-		DrawCVImage(pictureBox1, img);
+		catch (System::Exception ^e) {
+			MessageBox::Show("Boyut deðiþtirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 
 	}
 
-	//int newWidth = Convert::ToInt32(txtResizeX->Text);
-	//int newHeight = Convert::ToInt32(txtResizeY->Text);
-	
-	
-	//imshow("resize" ,newImg);
-
 }
+
 private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
 	int arr[256] = { 0 };
 	this->chart1->Series["Red"]->Points->Clear();
