@@ -144,6 +144,7 @@ namespace yazLabProject1 {
 			this->Name = L"inputDialogBox";
 			this->ShowIcon = false;
 			this->ShowInTaskbar = false;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Resize";
 			this->ResumeLayout(false);
 			this->PerformLayout();
