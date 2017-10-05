@@ -71,6 +71,7 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::GroupBox^  groupBox2;
 	private: System::Windows::Forms::Panel^  panel1;
 	private: System::Windows::Forms::Button^  btnSave;
+	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
 
 
 
@@ -119,6 +120,7 @@ namespace yazLabProject1 {
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
@@ -373,6 +375,7 @@ namespace yazLabProject1 {
 			this->btnSave->Size = System::Drawing::Size(39, 36);
 			this->btnSave->TabIndex = 16;
 			this->btnSave->UseVisualStyleBackColor = true;
+			this->btnSave->Click += gcnew System::EventHandler(this, &MainForm::btnSave_Click);
 			// 
 			// panel1
 			// 
@@ -389,7 +392,7 @@ namespace yazLabProject1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(1025, 578);
+			this->ClientSize = System::Drawing::Size(1042, 595);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->chart1);
@@ -800,6 +803,24 @@ private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::Eve
 		this->chart1->Series["Blue"]->Points->AddXY(k, arrB[k]);
 		this->chart1->Series["Green"]->Points->AddXY(k, arrG[k]);
 	}
+}
+
+private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^  e) {
+	
+	saveFileDialog1->Filter = "Jpeg|*.jpeg|Jpg|*.jpg|Png|*.png";
+	saveFileDialog1->Title = "Save image";
+	saveFileDialog1->ShowDialog();
+
+	if (saveFileDialog1->FileName != "") {
+		System::String ^ managed = saveFileDialog1->FileName;
+		std::string str = msclr::interop::marshal_as<std::string>(managed);
+
+		imwrite(str, img);
+
+
+	}
+
+
 }
 
 };
