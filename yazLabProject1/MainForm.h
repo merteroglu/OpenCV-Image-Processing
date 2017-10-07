@@ -2,6 +2,7 @@
 
 #include <opencv2\core\core.hpp>
 #include <opencv2\highgui\highgui.hpp>
+#include <opencv2\imgproc\imgproc.hpp>
 #include <string>
 #include <msclr\marshal_cppstd.h>
 #include "inputDialogBox.h"
@@ -95,9 +96,6 @@ namespace yazLabProject1 {
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series3 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series4 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -301,25 +299,7 @@ namespace yazLabProject1 {
 			series1->IsXValueIndexed = true;
 			series1->Legend = L"Legend1";
 			series1->Name = L"Histogram";
-			series2->ChartArea = L"ChartArea1";
-			series2->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series2->IsXValueIndexed = true;
-			series2->Legend = L"Legend1";
-			series2->Name = L"Red";
-			series3->ChartArea = L"ChartArea1";
-			series3->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series3->IsXValueIndexed = true;
-			series3->Legend = L"Legend1";
-			series3->Name = L"Blue";
-			series4->ChartArea = L"ChartArea1";
-			series4->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series4->IsXValueIndexed = true;
-			series4->Legend = L"Legend1";
-			series4->Name = L"Green";
 			this->chart1->Series->Add(series1);
-			this->chart1->Series->Add(series2);
-			this->chart1->Series->Add(series3);
-			this->chart1->Series->Add(series4);
 			this->chart1->Size = System::Drawing::Size(387, 74);
 			this->chart1->TabIndex = 11;
 			this->chart1->Text = L"chart1";
@@ -769,7 +749,7 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 
 				}
 			}
-			imshow("resized", newImg);
+			//imshow("resized", newImg);
 			img = newImg;
 			tempImg = img;
 			pictureBox1->Width = img.cols;
@@ -786,10 +766,8 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 }
 
 private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
-/*	int arr[256] = { 0 };
-	this->chart1->Series["Red"]->Points->Clear();
-	this->chart1->Series["Blue"]->Points->Clear();
-	this->chart1->Series["Green"]->Points->Clear();
+	int arr[256] = { 0 };
+	
 	this->chart1->Series["Histogram"]->Points->Clear();
 
 	for (int i = 0; i < img.rows; i++) {
@@ -801,7 +779,6 @@ private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, Syst
 	for (int k = 0; k < 256; k++) {
 		this->chart1->Series["Histogram"]->Points->AddXY(k, arr[k]);
 	}
-	*/
 
 
 
@@ -809,9 +786,7 @@ private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, Syst
 
 
 private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
-	this->chart1->Series["Red"]->Points->Clear();
-	this->chart1->Series["Blue"]->Points->Clear();
-	this->chart1->Series["Green"]->Points->Clear();
+	
 	this->chart1->Series["Histogram"]->Points->Clear();
 
 	int varLuma[256] = { 0 };
