@@ -429,7 +429,7 @@ namespace yazLabProject1 {
 			pictureBox1->Height = img.size().height;
 			//pictureBox1->Load(managed);
 			pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
-			//pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+			pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
 		}
 
 
@@ -541,6 +541,7 @@ namespace yazLabProject1 {
 			 return;
 		 
 		 try {
+			 
 		 System::Drawing::Graphics^ graphics = control->CreateGraphics();
 		 System::IntPtr ptr(colorImage.ptr());
 		 System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step, System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
@@ -550,7 +551,7 @@ namespace yazLabProject1 {
 		 delete graphics;
 		 }
 		 catch(...){
-		 MessageBox::Show("Resim Gösterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		// MessageBox::Show("Resim Gösterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		 } 
 
 	 }
@@ -773,7 +774,8 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 			tempImg = img;
 			pictureBox1->Width = img.cols;
 			pictureBox1->Height = img.rows;
-			DrawImageBox(pictureBox1, newImg);
+			DrawCVImage(pictureBox1, newImg);
+			//DrawImageBox(pictureBox1, newImg);
 		}
 		catch (System::Exception ^e) {
 			MessageBox::Show("Boyut değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
