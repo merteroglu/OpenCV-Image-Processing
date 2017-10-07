@@ -721,12 +721,12 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 	int newWidth, newHeight;
 
 	if (form->isOkey) {
-		newHeight = form->width;
-		newWidth = form->height;
+		 newWidth = form->width;
+		 newHeight = form->height;
 		
 
 		try {
-			cv::Size newSize = cv::Size(newHeight, newWidth);
+			cv::Size newSize = cv::Size(newWidth, newHeight);
 
 			Mat newImg = Mat::zeros(newSize, img.type());
 
@@ -735,8 +735,8 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 			for (int i = 0; i <newHeight; i++) {
 				for (int j = 0; j <newWidth; j++) {
 
-					imgX = (int)(round(((float)i) / (float)newWidth * (float)img.cols));
-					imgY = (int)(round(((float)j) / (float)newHeight * (float)img.rows));
+					imgX = (int)(round(((float)j) / (float)newWidth * (float)img.cols));
+					imgY = (int)(round(((float)i) / (float)newHeight * (float)img.rows));
 					imgX = min(imgX, img.cols - 1);
 					imgY = min(imgY, img.rows - 1);
 
@@ -745,7 +745,7 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 					uchar tempG = myVec[1];
 					uchar tempB = myVec[0];
 					cv::Vec3b newPoint(tempB, tempG, tempR);
-					newImg.at<cv::Vec3b>(j, i) = newPoint;
+					newImg.at<cv::Vec3b>(i, j) = newPoint;
 
 				}
 			}
@@ -754,7 +754,7 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 			tempImg = img;
 			pictureBox1->Width = img.cols;
 			pictureBox1->Height = img.rows;
-			DrawCVImage(pictureBox1, newImg);
+			DrawCVImage(pictureBox1, img);
 			//DrawImageBox(pictureBox1, newImg);
 		}
 		catch (System::Exception ^e) {
