@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <opencv2\core\core.hpp>
 #include <opencv2\highgui\highgui.hpp>
@@ -229,7 +229,7 @@ namespace yazLabProject1 {
 			this->groupBox1->Size = System::Drawing::Size(236, 50);
 			this->groupBox1->TabIndex = 10;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Renk Kanallarý";
+			this->groupBox1->Text = L"Renk KanallarÄ±";
 			// 
 			// rButtonOrjinal
 			// 
@@ -294,7 +294,7 @@ namespace yazLabProject1 {
 			this->chart1->ChartAreas->Add(chartArea1);
 			legend1->Name = L"Legend1";
 			this->chart1->Legends->Add(legend1);
-			this->chart1->Location = System::Drawing::Point(296, 92);
+			this->chart1->Location = System::Drawing::Point(745, 9);
 			this->chart1->Name = L"chart1";
 			series1->ChartArea = L"ChartArea1";
 			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
@@ -320,10 +320,9 @@ namespace yazLabProject1 {
 			this->chart1->Series->Add(series2);
 			this->chart1->Series->Add(series3);
 			this->chart1->Series->Add(series4);
-			this->chart1->Size = System::Drawing::Size(387, 128);
+			this->chart1->Size = System::Drawing::Size(387, 74);
 			this->chart1->TabIndex = 11;
 			this->chart1->Text = L"chart1";
-			this->chart1->Visible = false;
 			// 
 			// btnCreateGrayHistogram
 			// 
@@ -349,6 +348,7 @@ namespace yazLabProject1 {
 			// 
 			this->groupBox2->Controls->Add(this->btnSave);
 			this->groupBox2->Controls->Add(this->btnOpen);
+			this->groupBox2->Controls->Add(this->chart1);
 			this->groupBox2->Controls->Add(this->btnRGBHistogram);
 			this->groupBox2->Controls->Add(this->label1);
 			this->groupBox2->Controls->Add(this->groupBox1);
@@ -395,7 +395,6 @@ namespace yazLabProject1 {
 			this->ClientSize = System::Drawing::Size(1042, 595);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
-			this->Controls->Add(this->chart1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
@@ -417,7 +416,7 @@ namespace yazLabProject1 {
 		
 		
 		openFileDialog1->Filter = "Image Files |*.*|Jpg |*.jpg|Png |*.png|Jpeg |*.jpeg";
-		openFileDialog1->Title = "Resim Dosyasýný seçiniz";
+		openFileDialog1->Title = "Resim DosyasÄ±nÄ± seÃ§iniz";
 
 		if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 			//MessageBox::Show(openFileDialog1->FileName, "Path");
@@ -430,13 +429,13 @@ namespace yazLabProject1 {
 			pictureBox1->Height = img.size().height;
 			//pictureBox1->Load(managed);
 			pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
-			pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+			//pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
 		}
 
 
 
 		if (img.empty()) {
-			MessageBox::Show("Resim Açýlamadý", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Resim AÃ§Ä±lamadÄ±", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		else {
 		/*	namedWindow("Resim Gosterme", CV_WINDOW_AUTOSIZE);
@@ -513,22 +512,48 @@ namespace yazLabProject1 {
 	 void DrawCVImage(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
 		 if (img.empty())
 			 return;
-
+		 /*
 		 try {
 			 System::Drawing::Graphics^ graphics = control->CreateGraphics();
 			 System::IntPtr ptr(colorImage.ptr());
 			 System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step, System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
-			 System::Drawing::RectangleF rect(0, 0, control->Width, control->Height);
+
+ 			 System::Drawing::RectangleF rect(0, 0, control->Width, control->Height);
 			 graphics->DrawImage(b, rect);
 			 delete graphics;
 		 }
-		 catch(System::Exception ^e){
-			// MessageBox::Show("Resim Gösterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		 catch(...){
+			 MessageBox::Show("Resim GÃ¶sterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		 } */
+		 try {
+			 pictureBox1->Image = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step,
+				 System::Drawing::Imaging::PixelFormat::Format24bppRgb, (System::IntPtr)colorImage.ptr());
+			 pictureBox1->Refresh();
 		 }
+		 catch (...) {
 
+		 }
 		
 	 }
 
+	 void DrawImageBox(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
+		 if (img.empty())
+			 return;
+		 
+		 try {
+		 System::Drawing::Graphics^ graphics = control->CreateGraphics();
+		 System::IntPtr ptr(colorImage.ptr());
+		 System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step, System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
+
+		 System::Drawing::RectangleF rect(0, 0, control->Width, control->Height);
+		 graphics->DrawImage(b, rect);
+		 delete graphics;
+		 }
+		 catch(...){
+		 MessageBox::Show("Resim GÃ¶sterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		 } 
+
+	 }
 
 
 
@@ -536,33 +561,35 @@ private: System::Void btnSagaDondur_Click(System::Object^  sender, System::Event
 
 	if (img.empty())
 		return;
-
-	cv::Size newSize =  cv::Size(img.size().height, img.size().width);
-	Mat transpozeImg = Mat::zeros(newSize, img.type());
-	Mat dondurulenImg = Mat::zeros(newSize, img.type());
-	int i, j;
-
-		
+	
 	try {
+		cv::Size newSize = cv::Size(img.size().height, img.size().width);
+		Mat dondurulenImg = Mat::zeros(newSize, img.type());
+		int i, j;
+
 		for (i = 0; i < img.rows; i++) {
 			for (j = 0; j < img.cols; j++) {
 				dondurulenImg.at<cv::Vec3b>(j, i) = img.at<cv::Vec3b>(img.rows - i-1, j);
+				
 			}
 		}
 
 		img = dondurulenImg;
 		tempImg = img;
-		pictureBox1->Width = img.size().width;
-		pictureBox1->Height = img.size().height;
+		pictureBox1->Width = img.cols;
+		pictureBox1->Height = img.rows;
 
-		//imshow("dondurulen", dondurulenImg);
+		
+		
+		//imshow("dondurulen", img);
 		DrawCVImage(pictureBox1, img);
 
 	}
 	catch (System::Exception^ e) {
-		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show("Resim DÃ¶ndÃ¼rÃ¼lemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
+	
 }
 
 
@@ -590,7 +617,7 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 		DrawCVImage(pictureBox1, img);
 	}
 	catch (System::Exception ^e) {
-		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show("Resim DÃ¶ndÃ¼rÃ¼lemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
 	
@@ -621,22 +648,23 @@ private: System::Void btnGriTonlama_Click(System::Object^  sender, System::Event
 		DrawCVImage(pictureBox1, newImg);
 	}
 	catch(System::Exception ^e){
-		MessageBox::Show("Gri Tonlama Yapýlamadý", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show("Gri Tonlama YapÄ±lamadÄ±", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
 private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs^  e) {
 
-	if (path == NULL)
+	if (path == "")
 		return;
 
 	img = imread(path);
 	tempImg = img;
+	DrawCVImage(pictureBox1, img);
 	pictureBox1->Width = img.size().width;
 	pictureBox1->Height = img.size().height;
-	System::String ^ managed = openFileDialog1->FileName;
-	pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
-	pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+	//System::String ^ managed = openFileDialog1->FileName;
+	//pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
+	
 	rButtonOrjinal->Checked = true;
 }
 
@@ -650,7 +678,6 @@ void setRGBChannels(int type) {
 		for (int i = 0; i < img.rows; i++) {
 			for (int j = 0; j < img.cols; j++) {
 				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
-				//uchar temp = (myVec[0] + myVec[1] + myVec[2]) / 3;
 				uchar tempR = myVec[2];
 				uchar tempG = myVec[1];
 				uchar tempB = myVec[0];
@@ -675,7 +702,7 @@ void setRGBChannels(int type) {
 
 	}
 	catch (System::Exception ^e) {
-		MessageBox::Show("RGB Kanallarý deðiþtirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show("RGB KanallarÄ± deÄŸiÅŸtirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 
@@ -741,14 +768,15 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 
 				}
 			}
+			imshow("resized", newImg);
 			img = newImg;
 			tempImg = img;
-			pictureBox1->Width = img.size().width;
-			pictureBox1->Height = img.size().height;
-			DrawCVImage(pictureBox1, img);
+			pictureBox1->Width = img.cols;
+			pictureBox1->Height = img.rows;
+			DrawImageBox(pictureBox1, newImg);
 		}
 		catch (System::Exception ^e) {
-			MessageBox::Show("Boyut deðiþtirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Boyut deÄŸiÅŸtirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 
 	}
@@ -756,7 +784,7 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 }
 
 private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
-	int arr[256] = { 0 };
+/*	int arr[256] = { 0 };
 	this->chart1->Series["Red"]->Points->Clear();
 	this->chart1->Series["Blue"]->Points->Clear();
 	this->chart1->Series["Green"]->Points->Clear();
@@ -771,6 +799,9 @@ private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, Syst
 	for (int k = 0; k < 256; k++) {
 		this->chart1->Series["Histogram"]->Points->AddXY(k, arr[k]);
 	}
+	*/
+
+
 
 }
 
@@ -781,9 +812,8 @@ private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::Eve
 	this->chart1->Series["Green"]->Points->Clear();
 	this->chart1->Series["Histogram"]->Points->Clear();
 
-	int arrR[256] = { 0 };
-	int arrB[256] = { 0 };
-	int arrG[256] = { 0 };
+	int varLuma[256] = { 0 };
+
 
 	for (int i = 0; i < img.rows; i++) {
 		for (int j = 0; j < img.cols; j++) {
@@ -791,18 +821,20 @@ private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::Eve
 			uchar tempR = myVec[2];
 			uchar tempG = myVec[1];
 			uchar tempB = myVec[0];
-			arrR[(int)tempR]++;
-			arrB[(int)tempB]++;
-			arrG[(int)tempG]++;
-
+			
+			// VarLuma = 0.299Â²â‹…VarRed + 0.587Â²â‹…VarGreen + 0.114Â²â‹…VarBlue
+			// (0.0894f * (int)tempR) + (0.3445f * (int)tempG) + (0.0129f *(int)tempB);
+			int val = (0.089401f * (int)tempR) + (0.344569f * (int)tempG) + (0.012996f *(int)tempB);
+			varLuma[val]++;
+			
 		}
 	}
 
 	for (int k = 0; k < 256; k++) {
-		this->chart1->Series["Red"]->Points->AddXY(k, arrR[k]);
-		this->chart1->Series["Blue"]->Points->AddXY(k, arrB[k]);
-		this->chart1->Series["Green"]->Points->AddXY(k, arrG[k]);
+		this->chart1->Series["Histogram"]->Points->AddXY(k, varLuma[k]);
 	}
+
+	this->chart1->Visible = true;
 }
 
 private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^  e) {
