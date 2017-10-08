@@ -685,8 +685,8 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 			tempImg = img;
 			pictureBox1->Width = img.cols;
 			pictureBox1->Height = img.rows;
-			DrawCVImage(pictureBox1, img);
-			//DrawImageBox(pictureBox1, newImg);
+			//DrawCVImage(pictureBox1, img);
+			DrawImageBox(pictureBox1, newImg);
 		}
 		catch (System::Exception ^e) {
 			MessageBox::Show("Boyut değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -710,8 +710,6 @@ private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, Syst
 	for (int k = 0; k < 256; k++) {
 		this->chart1->Series["Histogram"]->Points->AddXY(k, arr[k]);
 	}
-
-
 
 }
 
@@ -756,11 +754,7 @@ private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^ 
 		std::string str = msclr::interop::marshal_as<std::string>(managed);
 
 		imwrite(str, img);
-
-
 	}
-
-
 }
 
 private: System::Void btnChangeChannels_Click(System::Object^  sender, System::EventArgs^  e) {

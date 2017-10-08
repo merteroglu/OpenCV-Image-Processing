@@ -7,7 +7,7 @@ d:\github\opencv-image-processing\yazlabproject1\MainForm.h(556): warning C4101:
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(584): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(637): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(691): warning C4101: 'e': unreferenced local variable
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(735): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(733): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 MainForm.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
 c:\opencv\build\include\opencv2\core\cvstd.hpp(596): warning C4793: 'cv::String::String': function compiled as native:
   	Found an intrinsic not supported in managed code
