@@ -397,22 +397,25 @@ namespace yazLabProject1 {
 		
 		openFileDialog1->Filter = "Image Files |*.*|Jpg |*.jpg|Png |*.png|Jpeg |*.jpeg";
 		openFileDialog1->Title = "Resim Dosyasını seçiniz";
-
-		if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-			//MessageBox::Show(openFileDialog1->FileName, "Path");
-			System::String ^ managed = openFileDialog1->FileName;
-			std::string str = msclr::interop::marshal_as<std::string>(managed);
-			path = str;
-			img = imread(str);
-			tempImg = img;
-			pictureBox1->Width = img.size().width;
-			pictureBox1->Height = img.size().height;
-			//pictureBox1->Load(managed);
-			pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
-			pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+		try {
+			if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				//MessageBox::Show(openFileDialog1->FileName, "Path");
+				System::String ^ managed = openFileDialog1->FileName;
+				std::string str = msclr::interop::marshal_as<std::string>(managed);
+				path = str;
+				img = imread(str);
+				tempImg = img;
+				pictureBox1->Width = img.size().width;
+				pictureBox1->Height = img.size().height;
+				//pictureBox1->Load(managed);
+				pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
+				pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+			}
 		}
-
-
+		catch (...) {
+			MessageBox::Show("Resim Açılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		
 
 		if (img.empty()) {
 			MessageBox::Show("Resim Açılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -434,29 +437,32 @@ namespace yazLabProject1 {
 
 		Mat negativeImg = Mat::zeros(img.size(), img.type());
 
-		label1->Text = "image rows:" + img.rows.ToString() + " image cols:" + img.cols.ToString() + " image size :" + img.size().width + "," + img.size().height;		
-
 		/*
 		Mat negativeImg = Mat::zeros(img.size(), img.type());
 		Mat sub_mat = Mat::ones(img.size(), img.type()) * 255;
 		
 		subtract(sub_mat, img, negativeImg);
 		*/
-
-		for (int i = 0; i < img.rows; i++) {
-			for (int j = 0; j < img.cols; j++) {
-				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
-				cv::Vec3b newPoint(255-myVec[0], 255 - myVec[1], 255 - myVec[2]);
-				negativeImg.at<cv::Vec3b>(i, j) = newPoint;
+		try {
+			for (int i = 0; i < img.rows; i++) {
+				for (int j = 0; j < img.cols; j++) {
+					cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+					cv::Vec3b newPoint(255 - myVec[0], 255 - myVec[1], 255 - myVec[2]);
+					negativeImg.at<cv::Vec3b>(i, j) = newPoint;
+				}
 			}
+
+			img = negativeImg;
+			tempImg = img;
+			//imshow("Negative image", negativeImg);
+
+			DrawCVImage(pictureBox1, negativeImg);
 		}
+		catch (...) {
 
-		img = negativeImg;
-		tempImg = img;
-		//imshow("Negative image", negativeImg);
-
-		DrawCVImage(pictureBox1, negativeImg);
-		waitKey(0);
+		}
+		
+		
 	}
 
     private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -467,26 +473,28 @@ namespace yazLabProject1 {
 		if (img.empty())
 			return;
 
-		Mat aynalananImg = Mat::zeros(img.size(), img.type());
-		int i,j;
-		
-		for (i = 0; i < img.rows; i++) {
-			for (j = 0; j < img.cols; j++) {
-				aynalananImg.at<cv::Vec3b>(i, img.cols - j - 1) = img.at<cv::Vec3b>(i, j);
+		try {
+			Mat aynalananImg = Mat::zeros(img.size(), img.type());
+			int i, j;
+
+			for (i = 0; i < img.rows; i++) {
+				for (j = 0; j < img.cols; j++) {
+					aynalananImg.at<cv::Vec3b>(i, img.cols - j - 1) = img.at<cv::Vec3b>(i, j);
+				}
 			}
+
+			img = aynalananImg;
+			tempImg = img;
+
+			DrawCVImage(pictureBox1, img);
+			//imshow("Aynalama",aynalananImg);
 		}
-		
-		
+		catch (...) {
 
-		label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
-		img = aynalananImg;
-		tempImg = img;
+		}
 
-		DrawCVImage(pictureBox1, img);
 
-		//imshow("Aynalama",aynalananImg);
-
-    }
+   }
 
 
 	 void DrawCVImage(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
@@ -601,10 +609,7 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
-	
 }
-
-
 
 private: System::Void btnGriTonlama_Click(System::Object^  sender, System::EventArgs^  e) {
 
