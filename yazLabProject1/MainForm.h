@@ -6,6 +6,7 @@
 #include <string>
 #include <msclr\marshal_cppstd.h>
 #include "inputDialogBox.h"
+#include "inputChannels.h"
 
 namespace yazLabProject1 {
 
@@ -35,6 +36,7 @@ namespace yazLabProject1 {
 			//
 			//TODO: Add the constructor code here
 			//
+			pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
 		}
 
 	protected:
@@ -58,11 +60,11 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::Button^  btnSolaDondur;
 	private: System::Windows::Forms::Button^  btnGriTonlama;
 	private: System::Windows::Forms::Button^  btnReOpen;
-	private: System::Windows::Forms::GroupBox^  groupBox1;
-	private: System::Windows::Forms::RadioButton^  rButtonOrjinal;
-	private: System::Windows::Forms::RadioButton^  rButtonBlue;
-	private: System::Windows::Forms::RadioButton^  rButtonGreen;
-	private: System::Windows::Forms::RadioButton^  rButtonRed;
+
+
+
+
+
 
 
 	private: System::Windows::Forms::Button^  btnResize;
@@ -73,6 +75,7 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::Panel^  panel1;
 	private: System::Windows::Forms::Button^  btnSave;
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
+	private: System::Windows::Forms::Button^  btnChangeChannels;
 
 
 
@@ -93,9 +96,9 @@ namespace yazLabProject1 {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea8 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^  legend8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^  series8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -106,21 +109,16 @@ namespace yazLabProject1 {
 			this->btnSolaDondur = (gcnew System::Windows::Forms::Button());
 			this->btnGriTonlama = (gcnew System::Windows::Forms::Button());
 			this->btnReOpen = (gcnew System::Windows::Forms::Button());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->rButtonOrjinal = (gcnew System::Windows::Forms::RadioButton());
-			this->rButtonBlue = (gcnew System::Windows::Forms::RadioButton());
-			this->rButtonGreen = (gcnew System::Windows::Forms::RadioButton());
-			this->rButtonRed = (gcnew System::Windows::Forms::RadioButton());
 			this->btnResize = (gcnew System::Windows::Forms::Button());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->btnCreateGrayHistogram = (gcnew System::Windows::Forms::Button());
 			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->btnChangeChannels = (gcnew System::Windows::Forms::Button());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->groupBox2->SuspendLayout();
 			this->panel1->SuspendLayout();
@@ -216,65 +214,6 @@ namespace yazLabProject1 {
 			this->btnReOpen->UseVisualStyleBackColor = true;
 			this->btnReOpen->Click += gcnew System::EventHandler(this, &MainForm::btnReOpen_Click);
 			// 
-			// groupBox1
-			// 
-			this->groupBox1->Controls->Add(this->rButtonOrjinal);
-			this->groupBox1->Controls->Add(this->rButtonBlue);
-			this->groupBox1->Controls->Add(this->rButtonGreen);
-			this->groupBox1->Controls->Add(this->rButtonRed);
-			this->groupBox1->Location = System::Drawing::Point(503, 19);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(236, 50);
-			this->groupBox1->TabIndex = 10;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Renk Kanalları";
-			// 
-			// rButtonOrjinal
-			// 
-			this->rButtonOrjinal->AutoSize = true;
-			this->rButtonOrjinal->Checked = true;
-			this->rButtonOrjinal->Location = System::Drawing::Point(171, 19);
-			this->rButtonOrjinal->Name = L"rButtonOrjinal";
-			this->rButtonOrjinal->Size = System::Drawing::Size(54, 17);
-			this->rButtonOrjinal->TabIndex = 3;
-			this->rButtonOrjinal->TabStop = true;
-			this->rButtonOrjinal->Text = L"Orjinal";
-			this->rButtonOrjinal->UseVisualStyleBackColor = true;
-			this->rButtonOrjinal->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonOrjinal_CheckedChanged);
-			// 
-			// rButtonBlue
-			// 
-			this->rButtonBlue->AutoSize = true;
-			this->rButtonBlue->Location = System::Drawing::Point(118, 19);
-			this->rButtonBlue->Name = L"rButtonBlue";
-			this->rButtonBlue->Size = System::Drawing::Size(46, 17);
-			this->rButtonBlue->TabIndex = 2;
-			this->rButtonBlue->Text = L"Blue";
-			this->rButtonBlue->UseVisualStyleBackColor = true;
-			this->rButtonBlue->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonBlue_CheckedChanged);
-			// 
-			// rButtonGreen
-			// 
-			this->rButtonGreen->AutoSize = true;
-			this->rButtonGreen->Location = System::Drawing::Point(58, 19);
-			this->rButtonGreen->Name = L"rButtonGreen";
-			this->rButtonGreen->Size = System::Drawing::Size(54, 17);
-			this->rButtonGreen->TabIndex = 1;
-			this->rButtonGreen->Text = L"Green";
-			this->rButtonGreen->UseVisualStyleBackColor = true;
-			this->rButtonGreen->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonGreen_CheckedChanged);
-			// 
-			// rButtonRed
-			// 
-			this->rButtonRed->AutoSize = true;
-			this->rButtonRed->Location = System::Drawing::Point(6, 19);
-			this->rButtonRed->Name = L"rButtonRed";
-			this->rButtonRed->Size = System::Drawing::Size(45, 17);
-			this->rButtonRed->TabIndex = 0;
-			this->rButtonRed->Text = L"Red";
-			this->rButtonRed->UseVisualStyleBackColor = true;
-			this->rButtonRed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::rButtonRed_CheckedChanged);
-			// 
 			// btnResize
 			// 
 			this->btnResize->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnResize.Image")));
@@ -288,18 +227,18 @@ namespace yazLabProject1 {
 			// 
 			// chart1
 			// 
-			chartArea1->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea1);
-			legend1->Name = L"Legend1";
-			this->chart1->Legends->Add(legend1);
-			this->chart1->Location = System::Drawing::Point(745, 9);
+			chartArea8->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea8);
+			legend8->Name = L"Legend1";
+			this->chart1->Legends->Add(legend8);
+			this->chart1->Location = System::Drawing::Point(808, 9);
 			this->chart1->Name = L"chart1";
-			series1->ChartArea = L"ChartArea1";
-			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series1->IsXValueIndexed = true;
-			series1->Legend = L"Legend1";
-			series1->Name = L"Histogram";
-			this->chart1->Series->Add(series1);
+			series8->ChartArea = L"ChartArea1";
+			series8->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+			series8->IsXValueIndexed = true;
+			series8->Legend = L"Legend1";
+			series8->Name = L"Histogram";
+			this->chart1->Series->Add(series8);
 			this->chart1->Size = System::Drawing::Size(387, 74);
 			this->chart1->TabIndex = 11;
 			this->chart1->Text = L"chart1";
@@ -326,12 +265,12 @@ namespace yazLabProject1 {
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->btnChangeChannels);
 			this->groupBox2->Controls->Add(this->btnSave);
 			this->groupBox2->Controls->Add(this->btnOpen);
 			this->groupBox2->Controls->Add(this->chart1);
 			this->groupBox2->Controls->Add(this->btnRGBHistogram);
 			this->groupBox2->Controls->Add(this->label1);
-			this->groupBox2->Controls->Add(this->groupBox1);
 			this->groupBox2->Controls->Add(this->btnResize);
 			this->groupBox2->Controls->Add(this->btnNegative);
 			this->groupBox2->Controls->Add(this->btnCreateGrayHistogram);
@@ -340,12 +279,22 @@ namespace yazLabProject1 {
 			this->groupBox2->Controls->Add(this->btnSolaDondur);
 			this->groupBox2->Controls->Add(this->btnGriTonlama);
 			this->groupBox2->Controls->Add(this->btnReOpen);
-			this->groupBox2->Location = System::Drawing::Point(2, 3);
+			this->groupBox2->Location = System::Drawing::Point(12, 3);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(1350, 83);
+			this->groupBox2->Size = System::Drawing::Size(1340, 83);
 			this->groupBox2->TabIndex = 16;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Menu";
+			// 
+			// btnChangeChannels
+			// 
+			this->btnChangeChannels->Location = System::Drawing::Point(503, 23);
+			this->btnChangeChannels->Name = L"btnChangeChannels";
+			this->btnChangeChannels->Size = System::Drawing::Size(38, 36);
+			this->btnChangeChannels->TabIndex = 17;
+			this->btnChangeChannels->Text = L"RGB";
+			this->btnChangeChannels->UseVisualStyleBackColor = true;
+			this->btnChangeChannels->Click += gcnew System::EventHandler(this, &MainForm::btnChangeChannels_Click);
 			// 
 			// btnSave
 			// 
@@ -364,7 +313,7 @@ namespace yazLabProject1 {
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Location = System::Drawing::Point(12, 92);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(1350, 650);
+			this->panel1->Size = System::Drawing::Size(1340, 620);
 			this->panel1->TabIndex = 17;
 			// 
 			// MainForm
@@ -372,16 +321,14 @@ namespace yazLabProject1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(1042, 595);
+			this->ClientSize = System::Drawing::Size(1024, 581);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Name = L"MainForm";
-			this->Text = L"MainForm";
+			this->Text = L"Imageshop - YazLab Proje 1";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			this->groupBox1->ResumeLayout(false);
-			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
@@ -409,7 +356,7 @@ namespace yazLabProject1 {
 				pictureBox1->Height = img.size().height;
 				//pictureBox1->Load(managed);
 				pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
-				pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+				
 			}
 		}
 		catch (...) {
@@ -514,7 +461,8 @@ namespace yazLabProject1 {
 			 MessageBox::Show("Resim Gösterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		 } */
 		 try {
-			 pictureBox1->Image = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step,
+			
+			 pictureBox1->BackgroundImage = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step,
 				 System::Drawing::Imaging::PixelFormat::Format24bppRgb, (System::IntPtr)colorImage.ptr());
 			 pictureBox1->Refresh();
 		 }
@@ -651,7 +599,6 @@ private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs
 	//System::String ^ managed = openFileDialog1->FileName;
 	//pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
 	
-	rButtonOrjinal->Checked = true;
 }
 
 void setRGBChannels(int type) {
@@ -693,27 +640,6 @@ void setRGBChannels(int type) {
 }
 
 
-private: System::Void rButtonRed_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
-	if (rButtonRed->Checked) {
-		setRGBChannels(0);
-	}
-}
-
-private: System::Void rButtonGreen_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
-	if (rButtonGreen->Checked) {
-		setRGBChannels(1);
-	}
-}
-private: System::Void rButtonBlue_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
-	if (rButtonBlue->Checked) {
-		setRGBChannels(2);
-	}
-}
-private: System::Void rButtonOrjinal_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
-	if (rButtonOrjinal->Checked) {
-		setRGBChannels(3);
-	}
-}
 private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs^  e) {
 
 	if (img.empty())
@@ -834,6 +760,20 @@ private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^ 
 
 	}
 
+
+}
+
+private: System::Void btnChangeChannels_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (img.empty())
+		return;
+
+	inputChannels ^ form = gcnew inputChannels;
+
+	form->ShowDialog();
+
+	if (form->isOk) {
+		setRGBChannels(form->select);
+	}
 
 }
 

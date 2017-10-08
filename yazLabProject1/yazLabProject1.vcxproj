@@ -148,10 +148,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="inputChannels.cpp" />
     <ClCompile Include="inputDialogBox.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inputChannels.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="inputDialogBox.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -160,6 +164,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="inputChannels.resx">
+      <DependentUpon>inputChannels.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="inputDialogBox.resx">
       <DependentUpon>inputDialogBox.h</DependentUpon>
     </EmbeddedResource>
