@@ -7,6 +7,7 @@
 #include <msclr\marshal_cppstd.h>
 #include "inputDialogBox.h"
 #include "inputChannels.h"
+#include "formHistogram.h"
 
 namespace yazLabProject1 {
 
@@ -37,6 +38,19 @@ namespace yazLabProject1 {
 			//TODO: Add the constructor code here
 			//
 			pictureBox1->BackgroundImageLayout = ImageLayout::Stretch;
+			toolTip1->SetToolTip(btnOpen, "Open");
+			toolTip1->SetToolTip(btnSave, "Save");
+			toolTip1->SetToolTip(btnNegative, "Negative");
+			toolTip1->SetToolTip(btnSagAynala, "Mirroring");
+			toolTip1->SetToolTip(btnSagaDondur, "Right rotate");
+			toolTip1->SetToolTip(btnSolaDondur, "Left rotate");
+			toolTip1->SetToolTip(btnGriTonlama, "Grayscale");
+			toolTip1->SetToolTip(btnReOpen, "Reopen");
+			toolTip1->SetToolTip(btnCreateGrayHistogram, "Gray Histogram");
+			toolTip1->SetToolTip(btnRGBHistogram, "RGB Histogram");
+			toolTip1->SetToolTip(btnResize, "Resize");
+			toolTip1->SetToolTip(btnChangeChannels, "Change RGB Channels");
+
 		}
 
 	protected:
@@ -68,7 +82,7 @@ namespace yazLabProject1 {
 
 
 	private: System::Windows::Forms::Button^  btnResize;
-	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
+
 	private: System::Windows::Forms::Button^  btnCreateGrayHistogram;
 	private: System::Windows::Forms::Button^  btnRGBHistogram;
 	private: System::Windows::Forms::GroupBox^  groupBox2;
@@ -76,6 +90,8 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::Button^  btnSave;
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
 	private: System::Windows::Forms::Button^  btnChangeChannels;
+	private: System::Windows::Forms::ToolTip^  toolTip1;
+	private: System::ComponentModel::IContainer^  components;
 
 
 
@@ -86,7 +102,7 @@ namespace yazLabProject1 {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -95,10 +111,8 @@ namespace yazLabProject1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^  chartArea8 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^  legend8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^  series8 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->btnOpen = (gcnew System::Windows::Forms::Button());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -110,7 +124,6 @@ namespace yazLabProject1 {
 			this->btnGriTonlama = (gcnew System::Windows::Forms::Button());
 			this->btnReOpen = (gcnew System::Windows::Forms::Button());
 			this->btnResize = (gcnew System::Windows::Forms::Button());
-			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->btnCreateGrayHistogram = (gcnew System::Windows::Forms::Button());
 			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
@@ -118,8 +131,8 @@ namespace yazLabProject1 {
 			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->groupBox2->SuspendLayout();
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
@@ -162,6 +175,7 @@ namespace yazLabProject1 {
 			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"label1";
+			this->label1->Visible = false;
 			this->label1->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
 			// 
 			// btnSagAynala
@@ -225,24 +239,6 @@ namespace yazLabProject1 {
 			this->btnResize->UseVisualStyleBackColor = true;
 			this->btnResize->Click += gcnew System::EventHandler(this, &MainForm::btnResize_Click);
 			// 
-			// chart1
-			// 
-			chartArea8->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea8);
-			legend8->Name = L"Legend1";
-			this->chart1->Legends->Add(legend8);
-			this->chart1->Location = System::Drawing::Point(808, 9);
-			this->chart1->Name = L"chart1";
-			series8->ChartArea = L"ChartArea1";
-			series8->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-			series8->IsXValueIndexed = true;
-			series8->Legend = L"Legend1";
-			series8->Name = L"Histogram";
-			this->chart1->Series->Add(series8);
-			this->chart1->Size = System::Drawing::Size(387, 74);
-			this->chart1->TabIndex = 11;
-			this->chart1->Text = L"chart1";
-			// 
 			// btnCreateGrayHistogram
 			// 
 			this->btnCreateGrayHistogram->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnCreateGrayHistogram.Image")));
@@ -268,7 +264,6 @@ namespace yazLabProject1 {
 			this->groupBox2->Controls->Add(this->btnChangeChannels);
 			this->groupBox2->Controls->Add(this->btnSave);
 			this->groupBox2->Controls->Add(this->btnOpen);
-			this->groupBox2->Controls->Add(this->chart1);
 			this->groupBox2->Controls->Add(this->btnRGBHistogram);
 			this->groupBox2->Controls->Add(this->label1);
 			this->groupBox2->Controls->Add(this->btnResize);
@@ -288,11 +283,11 @@ namespace yazLabProject1 {
 			// 
 			// btnChangeChannels
 			// 
+			this->btnChangeChannels->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnChangeChannels.Image")));
 			this->btnChangeChannels->Location = System::Drawing::Point(503, 23);
 			this->btnChangeChannels->Name = L"btnChangeChannels";
 			this->btnChangeChannels->Size = System::Drawing::Size(38, 36);
 			this->btnChangeChannels->TabIndex = 17;
-			this->btnChangeChannels->Text = L"RGB";
 			this->btnChangeChannels->UseVisualStyleBackColor = true;
 			this->btnChangeChannels->Click += gcnew System::EventHandler(this, &MainForm::btnChangeChannels_Click);
 			// 
@@ -321,7 +316,7 @@ namespace yazLabProject1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(1024, 581);
+			this->ClientSize = System::Drawing::Size(1058, 615);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -329,7 +324,6 @@ namespace yazLabProject1 {
 			this->Text = L"Imageshop - YazLab Proje 1";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
 			this->panel1->ResumeLayout(false);
@@ -697,54 +691,72 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 }
 
 private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (img.empty())
+		return;
+
+	formHistogram^ form = gcnew formHistogram;
+
+	form->Text = "Gray image Histogram";
+	
 	int arr[256] = { 0 };
 	
-	this->chart1->Series["Histogram"]->Points->Clear();
-
-	for (int i = 0; i < img.rows; i++) {
-		for (int j = 0; j < img.cols; j++) {
-			arr[(int)img.at<uchar>(i, j)]++;
+	try {
+		for (int i = 0; i < img.rows; i++) {
+			for (int j = 0; j < img.cols; j++) {
+				arr[(int)img.at<uchar>(i, j)]++;
+			}
 		}
 	}
+	catch (...) {
 
-	for (int k = 0; k < 256; k++) {
-		this->chart1->Series["Histogram"]->Points->AddXY(k, arr[k]);
 	}
 
+	form->chartDoldur(arr);
+	form->Show();
 }
 
 
 private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
 	
-	this->chart1->Series["Histogram"]->Points->Clear();
+	if (img.empty())
+		return;
+
+	formHistogram^ form = gcnew formHistogram;
+	
+	form->Text = "RGB Histogram";
 
 	int varLuma[256] = { 0 };
 
-
-	for (int i = 0; i < img.rows; i++) {
-		for (int j = 0; j < img.cols; j++) {
-			cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
-			uchar tempR = myVec[2];
-			uchar tempG = myVec[1];
-			uchar tempB = myVec[0];
-			
-			// VarLuma = 0.299²⋅VarRed + 0.587²⋅VarGreen + 0.114²⋅VarBlue
-			// (0.0894f * (int)tempR) + (0.3445f * (int)tempG) + (0.0129f *(int)tempB);
-			int val = (0.089401f * (int)tempR) + (0.344569f * (int)tempG) + (0.012996f *(int)tempB);
-			varLuma[val]++;
-			
+	try {
+		for (int i = 0; i < img.rows; i++) {
+			for (int j = 0; j < img.cols; j++) {
+				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+				uchar tempR = myVec[2];
+				uchar tempG = myVec[1];
+				uchar tempB = myVec[0];
+				// VarLuma = 0.299²⋅VarRed + 0.587²⋅VarGreen + 0.114²⋅VarBlue
+				// (0.0894f * (int)tempR) + (0.3445f * (int)tempG) + (0.0129f *(int)tempB);
+				//int val = (0.089401f * (int)tempR) + (0.344569f * (int)tempG) + (0.012996f *(int)tempB);
+				int val = (0.2126f * (int)tempR) + (0.7152f * (int)tempG) + (0.0722f *(int)tempB);
+				varLuma[val]++;
+			}
 		}
 	}
+	catch (...) {
 
-	for (int k = 0; k < 256; k++) {
-		this->chart1->Series["Histogram"]->Points->AddXY(k, varLuma[k]);
 	}
 
-	this->chart1->Visible = true;
+	form->chartDoldur(varLuma);
+
+	form->Show();
+
 }
 
 private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^  e) {
-	
+
+	if (img.empty())
+		return;
+
 	saveFileDialog1->Filter = "Jpeg|*.jpeg|Jpg|*.jpg|Png|*.png";
 	saveFileDialog1->Title = "Save image";
 	saveFileDialog1->ShowDialog();

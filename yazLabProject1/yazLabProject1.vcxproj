@@ -148,11 +148,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="formHistogram.cpp" />
     <ClCompile Include="inputChannels.cpp" />
     <ClCompile Include="inputDialogBox.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="formHistogram.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="inputChannels.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -164,6 +168,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formHistogram.resx">
+      <DependentUpon>formHistogram.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="inputChannels.resx">
       <DependentUpon>inputChannels.h</DependentUpon>
     </EmbeddedResource>

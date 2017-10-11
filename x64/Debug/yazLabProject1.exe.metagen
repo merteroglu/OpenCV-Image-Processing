@@ -1,3 +1,4 @@
+  yazLabProject1.formHistogram.resources - Embedded, ContainedInManifestFile, 
   yazLabProject1.inputChannels.resources - Embedded, ContainedInManifestFile, 
   yazLabProject1.inputDialogBox.resources - Embedded, ContainedInManifestFile, 
   yazLabProject1.MainForm.resources - Embedded, ContainedInManifestFile, 
@@ -18,6 +19,12 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
+Class yazLabProject1.formHistogram: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    chartDoldur(Int32* IsConst IsConst): PrivateScope, Public, HideBySig
+    chartTemizle(): PrivateScope, Public, HideBySig
 Class yazLabProject1.inputChannels: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
