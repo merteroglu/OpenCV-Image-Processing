@@ -334,8 +334,7 @@ namespace yazLabProject1 {
 
 
 	private: System::Void btnOpen_Click(System::Object^  sender, System::EventArgs^  e) {
-		
-		
+
 		openFileDialog1->Filter = "Image Files |*.*|Jpg |*.jpg|Png |*.png|Jpeg |*.jpeg";
 		openFileDialog1->Title = "Resim Dosyasını seçiniz";
 		try {
@@ -400,14 +399,15 @@ namespace yazLabProject1 {
 			DrawCVImage(pictureBox1, negativeImg);
 		}
 		catch (...) {
-
+			MessageBox::Show("Negatif işlemi yapılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 		
 		
 	}
 
     private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  e) {
-}
+	
+	}
 
     private: System::Void btnSagAynala_Click(System::Object^  sender, System::EventArgs^  e) {
 		
@@ -431,14 +431,14 @@ namespace yazLabProject1 {
 			//imshow("Aynalama",aynalananImg);
 		}
 		catch (...) {
-
+			MessageBox::Show("Aynalama işlemi yapılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
-
 
    }
 
 
 	 void DrawCVImage(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
+
 		 if (img.empty())
 			 return;
 		 /*
@@ -467,6 +467,7 @@ namespace yazLabProject1 {
 	 }
 
 	 void DrawImageBox(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
+
 		 if (img.empty())
 			 return;
 		 
@@ -485,8 +486,6 @@ namespace yazLabProject1 {
 		 } 
 
 	 }
-
-
 
 private: System::Void btnSagaDondur_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -510,8 +509,6 @@ private: System::Void btnSagaDondur_Click(System::Object^  sender, System::Event
 		pictureBox1->Width = img.cols;
 		pictureBox1->Height = img.rows;
 
-		
-		
 		//imshow("dondurulen", img);
 		DrawCVImage(pictureBox1, img);
 
@@ -520,9 +517,7 @@ private: System::Void btnSagaDondur_Click(System::Object^  sender, System::Event
 		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
-	
 }
-
 
 private: System::Void btnSolaDondur_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -539,12 +534,10 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 				dondurulenImg.at<cv::Vec3b>(img.cols - j - 1, i) = img.at<cv::Vec3b>(i, j);
 			}
 		}
-		label1->Text = " i ve j :" + i.ToString() + " , " + j.ToString();
 		img = dondurulenImg;
 		tempImg = img;
 		pictureBox1->Width = img.size().width;
 		pictureBox1->Height = img.size().height;
-
 		DrawCVImage(pictureBox1, img);
 	}
 	catch (System::Exception ^e) {
@@ -596,6 +589,7 @@ private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs
 }
 
 void setRGBChannels(int type) {
+
 	if (img.empty())
 		return;
 
@@ -649,7 +643,6 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 		 newWidth = form->width;
 		 newHeight = form->height;
 		
-
 		try {
 			cv::Size newSize = cv::Size(newWidth, newHeight);
 
@@ -671,7 +664,6 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 					uchar tempB = myVec[0];
 					cv::Vec3b newPoint(tempB, tempG, tempR);
 					newImg.at<cv::Vec3b>(i, j) = newPoint;
-
 				}
 			}
 			//imshow("resized", newImg);
@@ -685,12 +677,11 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 		catch (System::Exception ^e) {
 			MessageBox::Show("Boyut değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
-
 	}
-
 }
 
 private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, System::EventArgs^  e) {
+	
 	if (img.empty())
 		return;
 
@@ -708,7 +699,7 @@ private: System::Void btnCreateGrayHistogram_Click(System::Object^  sender, Syst
 		}
 	}
 	catch (...) {
-
+		MessageBox::Show("Histogram oluşturulamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
 	form->chartDoldur(arr);
@@ -743,7 +734,7 @@ private: System::Void btnRGBHistogram_Click(System::Object^  sender, System::Eve
 		}
 	}
 	catch (...) {
-
+		MessageBox::Show("Histogram oluşturulamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
 	form->chartDoldur(varLuma);
@@ -760,16 +751,22 @@ private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^ 
 	saveFileDialog1->Filter = "Jpeg|*.jpeg|Jpg|*.jpg|Png|*.png";
 	saveFileDialog1->Title = "Save image";
 	saveFileDialog1->ShowDialog();
+	try {
+		if (saveFileDialog1->FileName != "") {
+			System::String ^ managed = saveFileDialog1->FileName;
+			std::string str = msclr::interop::marshal_as<std::string>(managed);
 
-	if (saveFileDialog1->FileName != "") {
-		System::String ^ managed = saveFileDialog1->FileName;
-		std::string str = msclr::interop::marshal_as<std::string>(managed);
-
-		imwrite(str, img);
+			imwrite(str, img);
+		}
 	}
+	catch (...) {
+		MessageBox::Show("Resim kaydedilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	
 }
 
 private: System::Void btnChangeChannels_Click(System::Object^  sender, System::EventArgs^  e) {
+	
 	if (img.empty())
 		return;
 
