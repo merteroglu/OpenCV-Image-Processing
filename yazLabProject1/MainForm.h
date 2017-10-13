@@ -150,9 +150,11 @@ namespace yazLabProject1 {
 			// 
 			// pictureBox1
 			// 
+			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
 			this->pictureBox1->Location = System::Drawing::Point(3, 3);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(334, 270);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
 			this->pictureBox1->TabIndex = 1;
 			this->pictureBox1->TabStop = false;
 			this->pictureBox1->WaitOnLoad = true;
@@ -170,12 +172,11 @@ namespace yazLabProject1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(767, 35);
+			this->label1->Location = System::Drawing::Point(579, 35);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"label1";
-			this->label1->Visible = false;
 			this->label1->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
 			// 
 			// btnSagAynala
@@ -316,7 +317,7 @@ namespace yazLabProject1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(1058, 615);
+			this->ClientSize = System::Drawing::Size(1092, 649);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -327,6 +328,7 @@ namespace yazLabProject1 {
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
 			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -348,8 +350,9 @@ namespace yazLabProject1 {
 				pictureBox1->Width = img.size().width;
 				pictureBox1->Height = img.size().height;
 				//pictureBox1->Load(managed);
-				pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
-				
+				//pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
+				//DrawCVImage(pictureBox1, img);
+				MatToPictureBox(img);
 			}
 		}
 		catch (...) {
@@ -395,8 +398,8 @@ namespace yazLabProject1 {
 			img = negativeImg;
 			tempImg = img;
 			//imshow("Negative image", negativeImg);
-
-			DrawCVImage(pictureBox1, negativeImg);
+			//DrawCVImage(pictureBox1, negativeImg);
+			MatToPictureBox(img);
 		}
 		catch (...) {
 			MessageBox::Show("Negatif işlemi yapılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -427,7 +430,8 @@ namespace yazLabProject1 {
 			img = aynalananImg;
 			tempImg = img;
 
-			DrawCVImage(pictureBox1, img);
+			//DrawCVImage(pictureBox1, img);
+			MatToPictureBox(img);
 			//imshow("Aynalama",aynalananImg);
 		}
 		catch (...) {
@@ -455,15 +459,43 @@ namespace yazLabProject1 {
 			 MessageBox::Show("Resim Gösterilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		 } */
 		 try {
-			
-			 pictureBox1->BackgroundImage = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step,
-				 System::Drawing::Imaging::PixelFormat::Format24bppRgb, (System::IntPtr)colorImage.ptr());
+			 
+			// pictureBox1->BackgroundImage = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step,
+				// System::Drawing::Imaging::PixelFormat::Format24bppRgb, (System::IntPtr)colorImage.ptr());
+			 System::IntPtr ptr(colorImage.ptr());
+				pictureBox1->BackgroundImage = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step ,
+				 System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
 			 pictureBox1->Refresh();
 		 }
-		 catch (...) {
-
+		 catch (System::ArgumentException^ e) {
+			 MessageBox::Show(e->ToString(), "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		 }
 		
+	 }
+
+	 void MatToPictureBox(const cv::Mat& img) {
+		 if (img.type() != CV_8UC3) {
+			 MessageBox::Show("Desteklenmeyen format","Hata" ,MessageBoxButtons::OK, MessageBoxIcon::Error);
+		 }
+
+		 System::Drawing::Imaging::PixelFormat fmt(System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+		 Bitmap ^bmpimg = gcnew Bitmap(img.cols, img.rows, fmt);
+
+		 System::Drawing::Imaging::BitmapData ^data = bmpimg->LockBits(System::Drawing::Rectangle(0, 0, img.cols, img.rows), System::Drawing::Imaging::ImageLockMode::WriteOnly, fmt);
+
+		 byte *dstData = reinterpret_cast<byte*>(data->Scan0.ToPointer());
+
+		 unsigned char *srcData = img.data;
+
+		 for (int row = 0; row < data->Height; row++) {
+			 memcpy(reinterpret_cast<void*>(&dstData[row*data->Stride]), reinterpret_cast<void*>(&srcData[row*img.step]), img.cols*img.channels());
+		 }
+
+		 bmpimg->UnlockBits(data);
+
+		 pictureBox1->Image = bmpimg;
+		 pictureBox1->Refresh();
+
 	 }
 
 	 void DrawImageBox(System::Windows::Forms::Control^ control, cv::Mat& colorImage) {
@@ -472,13 +504,14 @@ namespace yazLabProject1 {
 			 return;
 		 
 		 try {
-			 
-		 System::Drawing::Graphics^ graphics = control->CreateGraphics();
+		 
+		 System::Drawing::Graphics^ graphics = pictureBox1->CreateGraphics();
 		 System::IntPtr ptr(colorImage.ptr());
 		 System::Drawing::Bitmap^ b = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step, System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
 
 		 System::Drawing::RectangleF rect(0, 0, control->Width, control->Height);
 		 graphics->DrawImage(b, rect);
+		 pictureBox1->Refresh();
 		 delete graphics;
 		 }
 		 catch(...){
@@ -486,6 +519,8 @@ namespace yazLabProject1 {
 		 } 
 
 	 }
+
+    
 
 private: System::Void btnSagaDondur_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -506,12 +541,12 @@ private: System::Void btnSagaDondur_Click(System::Object^  sender, System::Event
 
 		img = dondurulenImg;
 		tempImg = img;
-		pictureBox1->Width = img.cols;
-		pictureBox1->Height = img.rows;
 
 		//imshow("dondurulen", img);
-		DrawCVImage(pictureBox1, img);
-
+		//pictureBox1->Width = img.cols;
+		//pictureBox1->Height = img.rows;
+		//DrawCVImage(pictureBox1, img);
+		MatToPictureBox(img);
 	}
 	catch (System::Exception^ e) {
 		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -536,9 +571,10 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 		}
 		img = dondurulenImg;
 		tempImg = img;
-		pictureBox1->Width = img.size().width;
-		pictureBox1->Height = img.size().height;
-		DrawCVImage(pictureBox1, img);
+		//pictureBox1->Width = img.size().width;
+		//pictureBox1->Height = img.size().height;
+		//DrawCVImage(pictureBox1, img);
+		MatToPictureBox(img);
 	}
 	catch (System::Exception ^e) {
 		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -566,7 +602,8 @@ private: System::Void btnGriTonlama_Click(System::Object^  sender, System::Event
 		img = newImg;
 		tempImg = img;
 		//imshow("dondurulen", img);
-		DrawCVImage(pictureBox1, newImg);
+		//DrawCVImage(pictureBox1, newImg);
+		MatToPictureBox(img);
 	}
 	catch(System::Exception ^e){
 		MessageBox::Show("Gri Tonlama Yapılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -580,9 +617,11 @@ private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs
 
 	img = imread(path);
 	tempImg = img;
-	DrawCVImage(pictureBox1, img);
-	pictureBox1->Width = img.size().width;
-	pictureBox1->Height = img.size().height;
+	MatToPictureBox(img);
+	//DrawCVImage(pictureBox1, img);
+	//pictureBox1->Width = img.size().width;
+	//pictureBox1->Height = img.size().height;
+	
 	//System::String ^ managed = openFileDialog1->FileName;
 	//pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
 	
@@ -619,8 +658,8 @@ void setRGBChannels(int type) {
 			}
 		}
 		img = newImg;
-		DrawCVImage(pictureBox1, newImg);
-
+		//DrawCVImage(pictureBox1, newImg);
+		MatToPictureBox(img);
 	}
 	catch (System::Exception ^e) {
 		MessageBox::Show("RGB Kanalları değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -645,9 +684,10 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 		
 		try {
 			cv::Size newSize = cv::Size(newWidth, newHeight);
-
+			
 			Mat newImg = Mat::zeros(newSize, img.type());
 
+		
 			int imgX, imgY;
 
 			for (int i = 0; i <newHeight; i++) {
@@ -667,12 +707,13 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 				}
 			}
 			//imshow("resized", newImg);
-			img = newImg;
-			tempImg = img;
-			pictureBox1->Width = img.cols;
-			pictureBox1->Height = img.rows;
+			img = newImg.clone();
+			tempImg = img.clone();
+			MatToPictureBox(img);
+			
 			//DrawCVImage(pictureBox1, img);
-			DrawImageBox(pictureBox1, newImg);
+			//imshow("resized image", img);
+			
 		}
 		catch (System::Exception ^e) {
 			MessageBox::Show("Boyut değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);

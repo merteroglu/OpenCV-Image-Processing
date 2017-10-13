@@ -8,6 +8,12 @@ void main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	yazLabProject1::MainForm form;
-	Application::Run(%form);
+	try {
+		Application::Run(%form);
+	}
+	catch (...) {
+
+	}
+	
 
 }
