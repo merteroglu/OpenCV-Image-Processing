@@ -386,6 +386,7 @@ namespace yazLabProject1 {
 		
 		subtract(sub_mat, img, negativeImg);
 		*/
+
 		try {
 			for (int i = 0; i < img.rows; i++) {
 				for (int j = 0; j < img.cols; j++) {
@@ -642,13 +643,55 @@ void setRGBChannels(int type) {
 				uchar tempG = myVec[1];
 				uchar tempB = myVec[0];
 				if (type == 0) {
-					tempR = 255;
+					tempG = tempB = 0;
 				}
 				else if (type == 1) {
 					tempG = 255;
 				}
 				else if (type == 2) {
 					tempB = 255;
+				}
+				else if (type == 3) {
+					img = tempImg;
+				}
+				cv::Vec3b newPoint(tempB, tempG, tempR);
+				newImg.at<cv::Vec3b>(i, j) = newPoint;
+			}
+		}
+		img = newImg;
+		//DrawCVImage(pictureBox1, newImg);
+		MatToPictureBox(img);
+	}
+	catch (System::Exception ^e) {
+		MessageBox::Show("RGB Kanalları değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+}
+
+void setRGBChannels2(int type) {
+
+	if (img.empty())
+		return;
+
+	try {
+		Mat newImg = Mat::zeros(img.size(), img.type());
+		img = tempImg;
+		for (int i = 0; i < img.rows; i++) {
+			for (int j = 0; j < img.cols; j++) {
+				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+				uchar tempR = myVec[2];
+				uchar tempG = myVec[1];
+				uchar tempB = myVec[0];
+				if (type == 0) {
+					tempR = 0;
+					
+				}
+				else if (type == 1) {
+					tempG /= 3;
+					tempR = tempB = tempG;
+				}
+				else if (type == 2) {
+					tempB /= 3;
+					tempR = tempG = tempB;
 				}
 				else if (type == 3) {
 					img = tempImg;
@@ -816,7 +859,7 @@ private: System::Void btnChangeChannels_Click(System::Object^  sender, System::E
 	form->ShowDialog();
 
 	if (form->isOk) {
-		setRGBChannels(form->select);
+		setRGBChannels2(form->select);
 	}
 
 }
