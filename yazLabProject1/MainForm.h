@@ -8,6 +8,7 @@
 #include "inputDialogBox.h"
 #include "inputChannels.h"
 #include "formHistogram.h"
+#define histSize 20
 
 namespace yazLabProject1 {
 
@@ -24,6 +25,8 @@ namespace yazLabProject1 {
     
 	Mat img,tempImg;
 	std::string path;
+	int histStep = 0;
+	Mat historyImgs[histSize];
 
 	/// <summary>
 	/// Summary for MainForm
@@ -91,6 +94,7 @@ namespace yazLabProject1 {
 	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
 	private: System::Windows::Forms::Button^  btnChangeChannels;
 	private: System::Windows::Forms::ToolTip^  toolTip1;
+	private: System::Windows::Forms::Button^  btnUndo;
 	private: System::ComponentModel::IContainer^  components;
 
 
@@ -127,6 +131,7 @@ namespace yazLabProject1 {
 			this->btnCreateGrayHistogram = (gcnew System::Windows::Forms::Button());
 			this->btnRGBHistogram = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->btnUndo = (gcnew System::Windows::Forms::Button());
 			this->btnChangeChannels = (gcnew System::Windows::Forms::Button());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
@@ -162,7 +167,7 @@ namespace yazLabProject1 {
 			// btnNegative
 			// 
 			this->btnNegative->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnNegative.Image")));
-			this->btnNegative->Location = System::Drawing::Point(100, 23);
+			this->btnNegative->Location = System::Drawing::Point(144, 23);
 			this->btnNegative->Name = L"btnNegative";
 			this->btnNegative->Size = System::Drawing::Size(39, 36);
 			this->btnNegative->TabIndex = 2;
@@ -172,7 +177,7 @@ namespace yazLabProject1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(579, 35);
+			this->label1->Location = System::Drawing::Point(770, 35);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
@@ -182,7 +187,7 @@ namespace yazLabProject1 {
 			// btnSagAynala
 			// 
 			this->btnSagAynala->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSagAynala.Image")));
-			this->btnSagAynala->Location = System::Drawing::Point(145, 23);
+			this->btnSagAynala->Location = System::Drawing::Point(189, 23);
 			this->btnSagAynala->Name = L"btnSagAynala";
 			this->btnSagAynala->Size = System::Drawing::Size(39, 36);
 			this->btnSagAynala->TabIndex = 4;
@@ -192,7 +197,7 @@ namespace yazLabProject1 {
 			// btnSagaDondur
 			// 
 			this->btnSagaDondur->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSagaDondur.Image")));
-			this->btnSagaDondur->Location = System::Drawing::Point(190, 23);
+			this->btnSagaDondur->Location = System::Drawing::Point(234, 23);
 			this->btnSagaDondur->Name = L"btnSagaDondur";
 			this->btnSagaDondur->Size = System::Drawing::Size(39, 36);
 			this->btnSagaDondur->TabIndex = 5;
@@ -202,7 +207,7 @@ namespace yazLabProject1 {
 			// btnSolaDondur
 			// 
 			this->btnSolaDondur->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnSolaDondur.Image")));
-			this->btnSolaDondur->Location = System::Drawing::Point(235, 23);
+			this->btnSolaDondur->Location = System::Drawing::Point(279, 23);
 			this->btnSolaDondur->Name = L"btnSolaDondur";
 			this->btnSolaDondur->Size = System::Drawing::Size(39, 36);
 			this->btnSolaDondur->TabIndex = 6;
@@ -212,7 +217,7 @@ namespace yazLabProject1 {
 			// btnGriTonlama
 			// 
 			this->btnGriTonlama->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnGriTonlama.Image")));
-			this->btnGriTonlama->Location = System::Drawing::Point(280, 23);
+			this->btnGriTonlama->Location = System::Drawing::Point(324, 23);
 			this->btnGriTonlama->Name = L"btnGriTonlama";
 			this->btnGriTonlama->Size = System::Drawing::Size(39, 36);
 			this->btnGriTonlama->TabIndex = 7;
@@ -222,7 +227,7 @@ namespace yazLabProject1 {
 			// btnReOpen
 			// 
 			this->btnReOpen->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnReOpen.Image")));
-			this->btnReOpen->Location = System::Drawing::Point(325, 23);
+			this->btnReOpen->Location = System::Drawing::Point(369, 23);
 			this->btnReOpen->Name = L"btnReOpen";
 			this->btnReOpen->Size = System::Drawing::Size(39, 36);
 			this->btnReOpen->TabIndex = 8;
@@ -232,7 +237,7 @@ namespace yazLabProject1 {
 			// btnResize
 			// 
 			this->btnResize->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnResize.Image")));
-			this->btnResize->Location = System::Drawing::Point(459, 23);
+			this->btnResize->Location = System::Drawing::Point(413, 23);
 			this->btnResize->Margin = System::Windows::Forms::Padding(2);
 			this->btnResize->Name = L"btnResize";
 			this->btnResize->Size = System::Drawing::Size(39, 36);
@@ -243,7 +248,7 @@ namespace yazLabProject1 {
 			// btnCreateGrayHistogram
 			// 
 			this->btnCreateGrayHistogram->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnCreateGrayHistogram.Image")));
-			this->btnCreateGrayHistogram->Location = System::Drawing::Point(370, 23);
+			this->btnCreateGrayHistogram->Location = System::Drawing::Point(501, 23);
 			this->btnCreateGrayHistogram->Name = L"btnCreateGrayHistogram";
 			this->btnCreateGrayHistogram->Size = System::Drawing::Size(39, 36);
 			this->btnCreateGrayHistogram->TabIndex = 14;
@@ -253,7 +258,7 @@ namespace yazLabProject1 {
 			// btnRGBHistogram
 			// 
 			this->btnRGBHistogram->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnRGBHistogram.Image")));
-			this->btnRGBHistogram->Location = System::Drawing::Point(415, 23);
+			this->btnRGBHistogram->Location = System::Drawing::Point(546, 23);
 			this->btnRGBHistogram->Name = L"btnRGBHistogram";
 			this->btnRGBHistogram->Size = System::Drawing::Size(39, 36);
 			this->btnRGBHistogram->TabIndex = 15;
@@ -262,6 +267,7 @@ namespace yazLabProject1 {
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->btnUndo);
 			this->groupBox2->Controls->Add(this->btnChangeChannels);
 			this->groupBox2->Controls->Add(this->btnSave);
 			this->groupBox2->Controls->Add(this->btnOpen);
@@ -282,10 +288,22 @@ namespace yazLabProject1 {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Menu";
 			// 
+			// btnUndo
+			// 
+			this->btnUndo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnUndo.BackgroundImage")));
+			this->btnUndo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->btnUndo->Location = System::Drawing::Point(100, 23);
+			this->btnUndo->Name = L"btnUndo";
+			this->btnUndo->Size = System::Drawing::Size(38, 36);
+			this->btnUndo->TabIndex = 18;
+			this->toolTip1->SetToolTip(this->btnUndo, L"Undo");
+			this->btnUndo->UseVisualStyleBackColor = true;
+			this->btnUndo->Click += gcnew System::EventHandler(this, &MainForm::btnUndo_Click);
+			// 
 			// btnChangeChannels
 			// 
 			this->btnChangeChannels->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnChangeChannels.Image")));
-			this->btnChangeChannels->Location = System::Drawing::Point(503, 23);
+			this->btnChangeChannels->Location = System::Drawing::Point(457, 23);
 			this->btnChangeChannels->Name = L"btnChangeChannels";
 			this->btnChangeChannels->Size = System::Drawing::Size(38, 36);
 			this->btnChangeChannels->TabIndex = 17;
@@ -317,7 +335,7 @@ namespace yazLabProject1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(1092, 649);
+			this->ClientSize = System::Drawing::Size(1126, 683);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->groupBox2);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -353,6 +371,7 @@ namespace yazLabProject1 {
 				//pictureBox1->BackgroundImage = System::Drawing::Image::FromFile(managed);
 				//DrawCVImage(pictureBox1, img);
 				MatToPictureBox(img);
+				addToHistory(img);
 			}
 		}
 		catch (...) {
@@ -401,6 +420,7 @@ namespace yazLabProject1 {
 			//imshow("Negative image", negativeImg);
 			//DrawCVImage(pictureBox1, negativeImg);
 			MatToPictureBox(img);
+			addToHistory(img);
 		}
 		catch (...) {
 			MessageBox::Show("Negatif işlemi yapılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -433,6 +453,7 @@ namespace yazLabProject1 {
 
 			//DrawCVImage(pictureBox1, img);
 			MatToPictureBox(img);
+			addToHistory(img);
 			//imshow("Aynalama",aynalananImg);
 		}
 		catch (...) {
@@ -548,6 +569,7 @@ private: System::Void btnSagaDondur_Click(System::Object^  sender, System::Event
 		//pictureBox1->Height = img.rows;
 		//DrawCVImage(pictureBox1, img);
 		MatToPictureBox(img);
+		addToHistory(img);
 	}
 	catch (System::Exception^ e) {
 		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -576,6 +598,7 @@ private: System::Void btnSolaDondur_Click(System::Object^  sender, System::Event
 		//pictureBox1->Height = img.size().height;
 		//DrawCVImage(pictureBox1, img);
 		MatToPictureBox(img);
+		addToHistory(img);
 	}
 	catch (System::Exception ^e) {
 		MessageBox::Show("Resim Döndürülemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -605,6 +628,7 @@ private: System::Void btnGriTonlama_Click(System::Object^  sender, System::Event
 		//imshow("dondurulen", img);
 		//DrawCVImage(pictureBox1, newImg);
 		MatToPictureBox(img);
+		addToHistory(img);
 	}
 	catch(System::Exception ^e){
 		MessageBox::Show("Gri Tonlama Yapılamadı", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -619,6 +643,7 @@ private: System::Void btnReOpen_Click(System::Object^  sender, System::EventArgs
 	img = imread(path);
 	tempImg = img;
 	MatToPictureBox(img);
+	addToHistory(img);
 	//DrawCVImage(pictureBox1, img);
 	//pictureBox1->Width = img.size().width;
 	//pictureBox1->Height = img.size().height;
@@ -664,6 +689,7 @@ void setRGBChannels(int type) {
 		
 		//DrawCVImage(pictureBox1, newImg);
 		MatToPictureBox(img);
+		addToHistory(img);
 	}
 	catch (System::Exception ^e) {
 		MessageBox::Show("RGB Kanalları değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -706,6 +732,7 @@ void setRGBChannels2(int type) {
 		img = newImg;
 		//DrawCVImage(pictureBox1, newImg);
 		MatToPictureBox(img);
+		addToHistory(img);
 	}
 	catch (System::Exception ^e) {
 		MessageBox::Show("RGB Kanalları değiştirilemedi", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -756,7 +783,7 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 			img = newImg.clone();
 			tempImg = img.clone();
 			MatToPictureBox(img);
-			
+			addToHistory(img);
 			//DrawCVImage(pictureBox1, img);
 			//imshow("resized image", img);
 			
@@ -867,6 +894,31 @@ private: System::Void btnChangeChannels_Click(System::Object^  sender, System::E
 
 }
 
+private: void addToHistory(Mat img){
+	if (histStep < histSize) {
+		historyImgs[histStep] = img;
+		histStep++;
+	}
+	else {
+		for (int i = 1; i < histSize; i++) {
+			historyImgs[i - 1] = historyImgs[i];
+		}
+		historyImgs[histStep] = img;
+	}
+}
+
+private: void undo() {
+	if (histStep > 1) {
+		histStep--;
+		img = historyImgs[histStep - 1];
+		MatToPictureBox(img);
+	}
+}
+
+
+private: System::Void btnUndo_Click(System::Object^  sender, System::EventArgs^  e) {
+	undo();
+}
 };
 
 
