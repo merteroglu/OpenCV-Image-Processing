@@ -152,24 +152,28 @@ namespace yazLabProject1 {
 		}
 #pragma endregion
 	private: System::Void btnOk_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (txtBoxWidth->TextLength != 0 && txtBoxHeight->TextLength != 0) {
-			if (Convert::ToInt32(txtBoxWidth->Text) > 0 && Convert::ToInt32(txtBoxHeight->Text) > 0) {
-				isOkey = true;
-				width = Convert::ToInt32(txtBoxWidth->Text);
-				height = Convert::ToInt32(txtBoxHeight->Text);
-				Close();
+		try {
+			if (txtBoxWidth->TextLength != 0 && txtBoxHeight->TextLength != 0) {
+				if (Convert::ToInt32(txtBoxWidth->Text) > 0 && Convert::ToInt32(txtBoxHeight->Text) > 0) {
+					isOkey = true;
+					width = Convert::ToInt32(txtBoxWidth->Text);
+					height = Convert::ToInt32(txtBoxHeight->Text);
+					Close();
+				}
+				else {
+					// Show message
+					MessageBox::Show("Yeni deðerler pozitif olmalýdýr", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					
+				}
+
 			}
 			else {
 				// Show message
-				MessageBox::Show("Yeni deðerler pozitif olmalýdýr.");
+				MessageBox::Show("Deðerler boþ býrakýlamaz", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
-
+		}catch(...){
+			MessageBox::Show("Yalnýzca sayý girilebilir", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
-		else {
-			// Show message
-			MessageBox::Show("Deðerler boþ býrakýlamaz.");
-		}
-
 	}
 };
 }

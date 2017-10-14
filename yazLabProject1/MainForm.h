@@ -636,6 +636,7 @@ void setRGBChannels(int type) {
 	try {
 		Mat newImg = Mat::zeros(img.size(), img.type());
 		img = tempImg;
+		if(type != 3){
 		for (int i = 0; i < img.rows; i++) {
 			for (int j = 0; j < img.cols; j++) {
 				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
@@ -643,7 +644,7 @@ void setRGBChannels(int type) {
 				uchar tempG = myVec[1];
 				uchar tempB = myVec[0];
 				if (type == 0) {
-					tempG = tempB = 0;
+					tempR = 255;
 				}
 				else if (type == 1) {
 					tempG = 255;
@@ -651,14 +652,16 @@ void setRGBChannels(int type) {
 				else if (type == 2) {
 					tempB = 255;
 				}
-				else if (type == 3) {
-					img = tempImg;
-				}
 				cv::Vec3b newPoint(tempB, tempG, tempR);
 				newImg.at<cv::Vec3b>(i, j) = newPoint;
 			}
+		  }
+			img = newImg;
 		}
-		img = newImg;
+		else {
+			img = tempImg;
+		}
+		
 		//DrawCVImage(pictureBox1, newImg);
 		MatToPictureBox(img);
 	}
@@ -859,7 +862,7 @@ private: System::Void btnChangeChannels_Click(System::Object^  sender, System::E
 	form->ShowDialog();
 
 	if (form->isOk) {
-		setRGBChannels2(form->select);
+		setRGBChannels(form->select);
 	}
 
 }
