@@ -708,19 +708,25 @@ void setRGBChannels2(int type) {
 		return;
 
 	try {
-		Mat newImg = Mat::zeros(img.size(), CV_8UC1);
+		Mat newImg = Mat::zeros(img.size(), img.type());
 		img = tempImg;
 		for (int i = 0; i < img.rows; i++) {
 			for (int j = 0; j < img.cols; j++) {
-			
+				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
+				uchar tempR = myVec[2];
+				uchar tempG = myVec[1];
+				uchar tempB = myVec[0];
 				if (type == 0) {
-					newImg.at<uchar>(i, j) = img.at<cv::Vec3b>(i,j)[2];
+					cv::Vec3b newPoint(tempR, tempR, tempR);
+					newImg.at<cv::Vec3b>(i, j) = newPoint;
 				}
 				else if (type == 1) {
-					newImg.at<uchar>(i, j) = img.at<cv::Vec3b>(i, j)[1];
+					cv::Vec3b newPoint(tempG, tempG, tempG);
+					newImg.at<cv::Vec3b>(i, j) = newPoint;
 				}
 				else if (type == 2) {
-					newImg.at<uchar>(i, j) = img.at<cv::Vec3b>(i, j)[0];
+					cv::Vec3b newPoint(tempB, tempB, tempB);
+					newImg.at<cv::Vec3b>(i, j) = newPoint;
 				}
 				else if (type == 3) {
 					img = tempImg;
