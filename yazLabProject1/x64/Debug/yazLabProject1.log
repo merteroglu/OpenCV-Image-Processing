@@ -1,11 +1,11 @@
 ﻿  MainForm.cpp
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(489): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(532): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(534): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(574): warning C4101: 'e': unreferenced local variable
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(603): warning C4101: 'e': unreferenced local variable
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(633): warning C4101: 'e': unreferenced local variable
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(694): warning C4101: 'e': unreferenced local variable
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(492): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(538): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(540): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(580): warning C4101: 'e': unreferenced local variable
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(609): warning C4101: 'e': unreferenced local variable
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(639): warning C4101: 'e': unreferenced local variable
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(700): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(737): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(791): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(845): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data

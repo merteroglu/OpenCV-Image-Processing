@@ -484,9 +484,12 @@ namespace yazLabProject1 {
 			 
 			// pictureBox1->BackgroundImage = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step,
 				// System::Drawing::Imaging::PixelFormat::Format24bppRgb, (System::IntPtr)colorImage.ptr());
+			 Mat gray;
+			 cv::cvtColor(colorImage, gray, CV_BGR2GRAY, 1);
+			 colorImage = gray;
 			 System::IntPtr ptr(colorImage.ptr());
-				pictureBox1->BackgroundImage = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step ,
-				 System::Drawing::Imaging::PixelFormat::Format24bppRgb, ptr);
+				pictureBox1->Image = gcnew System::Drawing::Bitmap(colorImage.cols, colorImage.rows, colorImage.step  ,
+				 System::Drawing::Imaging::PixelFormat::Format8bppIndexed, ptr);
 			 pictureBox1->Refresh();
 		 }
 		 catch (System::ArgumentException^ e) {
@@ -498,9 +501,12 @@ namespace yazLabProject1 {
 	 void MatToPictureBox(const cv::Mat& img) {
 		 if (img.type() != CV_8UC3) {
 			 MessageBox::Show("Desteklenmeyen format","Hata" ,MessageBoxButtons::OK, MessageBoxIcon::Error);
+			 return;
 		 }
+		
 
-		 System::Drawing::Imaging::PixelFormat fmt(System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+		 System::Drawing::Imaging::PixelFormat fmt ( System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+		 
 		 Bitmap ^bmpimg = gcnew Bitmap(img.cols, img.rows, fmt);
 
 		 System::Drawing::Imaging::BitmapData ^data = bmpimg->LockBits(System::Drawing::Rectangle(0, 0, img.cols, img.rows), System::Drawing::Imaging::ImageLockMode::WriteOnly, fmt);
@@ -702,36 +708,30 @@ void setRGBChannels2(int type) {
 		return;
 
 	try {
-		Mat newImg = Mat::zeros(img.size(), img.type());
+		Mat newImg = Mat::zeros(img.size(), CV_8UC1);
 		img = tempImg;
 		for (int i = 0; i < img.rows; i++) {
 			for (int j = 0; j < img.cols; j++) {
-				cv::Vec3b myVec = img.at<cv::Vec3b>(i, j);
-				uchar tempR = myVec[2];
-				uchar tempG = myVec[1];
-				uchar tempB = myVec[0];
+			
 				if (type == 0) {
-					tempR = 0;
-					
+					newImg.at<uchar>(i, j) = img.at<cv::Vec3b>(i,j)[2];
 				}
 				else if (type == 1) {
-					tempG /= 3;
-					tempR = tempB = tempG;
+					newImg.at<uchar>(i, j) = img.at<cv::Vec3b>(i, j)[1];
 				}
 				else if (type == 2) {
-					tempB /= 3;
-					tempR = tempG = tempB;
+					newImg.at<uchar>(i, j) = img.at<cv::Vec3b>(i, j)[0];
 				}
 				else if (type == 3) {
 					img = tempImg;
 				}
-				cv::Vec3b newPoint(tempB, tempG, tempR);
-				newImg.at<cv::Vec3b>(i, j) = newPoint;
+				
+				
 			}
 		}
 		img = newImg;
-		//DrawCVImage(pictureBox1, newImg);
-		MatToPictureBox(img);
+		imshow("ss", newImg);
+	    MatToPictureBox(img);
 		addToHistory(img);
 	}
 	catch (System::Exception ^e) {
@@ -889,7 +889,7 @@ private: System::Void btnChangeChannels_Click(System::Object^  sender, System::E
 	form->ShowDialog();
 
 	if (form->isOk) {
-		setRGBChannels(form->select);
+		setRGBChannels2(form->select);
 	}
 
 }
