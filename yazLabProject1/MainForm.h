@@ -736,7 +736,6 @@ void setRGBChannels2(int type) {
 			}
 		}
 		img = newImg;
-		imshow("ss", newImg);
 	    MatToPictureBox(img);
 		addToHistory(img);
 	}
@@ -917,6 +916,7 @@ private: void undo() {
 	if (histStep > 1) {
 		histStep--;
 		img = historyImgs[histStep - 1];
+		tempImg = img;
 		MatToPictureBox(img);
 	}
 }
