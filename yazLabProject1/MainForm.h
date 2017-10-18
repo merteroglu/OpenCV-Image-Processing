@@ -292,6 +292,7 @@ namespace yazLabProject1 {
 			// 
 			this->btnUndo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btnUndo.BackgroundImage")));
 			this->btnUndo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->btnUndo->Enabled = false;
 			this->btnUndo->Location = System::Drawing::Point(100, 23);
 			this->btnUndo->Name = L"btnUndo";
 			this->btnUndo->Size = System::Drawing::Size(38, 36);
@@ -910,6 +911,10 @@ private: void addToHistory(Mat img){
 		}
 		historyImgs[histStep] = img;
 	}
+
+	if (histStep > 1 && btnUndo->Enabled == false) {
+		btnUndo->Enabled = true;
+	}
 }
 
 private: void undo() {
@@ -918,6 +923,9 @@ private: void undo() {
 		img = historyImgs[histStep - 1];
 		tempImg = img;
 		MatToPictureBox(img);
+		if (histStep == 1) {
+			btnUndo->Enabled = false;
+		}
 	}
 }
 
