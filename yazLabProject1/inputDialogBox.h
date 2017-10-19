@@ -175,5 +175,11 @@ namespace yazLabProject1 {
 			MessageBox::Show("Yalnýzca sayý girilebilir", "Hata", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
+
+	public: System::Void setTextboxes(int w, int h) {
+		txtBoxWidth->AppendText(w.ToString());
+		txtBoxHeight->AppendText(h.ToString());
+	}
+
 };
 }

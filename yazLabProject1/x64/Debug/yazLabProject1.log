@@ -1,4 +1,5 @@
-﻿  MainForm.cpp
+﻿  inputDialogBox.cpp
+  MainForm.cpp
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(509): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(555): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(557): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -7,9 +8,10 @@ d:\github\opencv-image-processing\yazlabproject1\MainForm.h(626): warning C4101:
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(656): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(717): warning C4101: 'e': unreferenced local variable
 d:\github\opencv-image-processing\yazlabproject1\MainForm.h(759): warning C4101: 'e': unreferenced local variable
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(813): warning C4101: 'e': unreferenced local variable
-d:\github\opencv-image-processing\yazlabproject1\MainForm.h(867): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(815): warning C4101: 'e': unreferenced local variable
+d:\github\opencv-image-processing\yazlabproject1\MainForm.h(869): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 MainForm.cpp(7): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+  Generating Code...
 c:\opencv\build\include\opencv2\core\cvstd.hpp(596): warning C4793: 'cv::String::String': function compiled as native:
   	Found an intrinsic not supported in managed code
 c:\opencv\build\include\opencv2\core\mat.inl.hpp(413): warning C4793: 'cv::Mat::Mat': function compiled as native:

@@ -38,6 +38,8 @@ Class yazLabProject1.inputDialogBox: AutoLayout, AnsiClass, Class, Public, Befor
     Boolean isOkey : Public
     Int32 width : Public
     Int32 height : Public
+  Methods:
+    setTextboxes(Int32, Int32): PrivateScope, Public, HideBySig
 Class yazLabProject1.MainForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

@@ -746,7 +746,7 @@ void setRGBChannels2(int type) {
 					newImg.at<cv::Vec3b>(i, j) = newPoint;
 				}
 				else if (type == 3) {
-					img = tempImg;
+					newImg = tempImg;
 				}
 				
 				
@@ -768,6 +768,8 @@ private: System::Void btnResize_Click(System::Object^  sender, System::EventArgs
 		return;
 
 	inputDialogBox ^ form = gcnew inputDialogBox;
+
+	form->setTextboxes(img.cols, img.rows);
 
 	form->ShowDialog();
 
